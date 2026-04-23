@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#E8A5A0">
+<title>Cruise Club · 나만의 크루즈 플랜</title>
+<style>
+  :root {
+    --rose: #E8A5A0;
+    --rose-deep: #D88A85;
+    --rose-soft: #F4CBC7;
+    --blush: #FDE8E5;
+    --peach: #FFD8CC;
+    --cream: #FFF9F5;
+    --warm-white: #FEFBF7;
+    --terracotta: #C97064;
+    --brown: #6B4A3F;
+    --brown-soft: #8B6B5D;
+    --ink: #3E2E28;
+    --mute: #8A7168;
+    --gold-warm: #C9A06B;
+    --green: #7BA98C;
+    --line: rgba(200, 112, 100, 0.15);
+    --shadow-sm: 0 2px 10px rgba(200, 112, 100, 0.08);
+    --shadow-md: 0 8px 28px rgba(200, 112, 100, 0.14);
+    --shadow-lg: 0 20px 60px rgba(200, 112, 100, 0.2);
+    --shadow-rose: 0 12px 32px rgba(216, 138, 133, 0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Gulim', '굴림', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.8;
+    word-break: keep-all;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* ======== TOP NAV (회사 소개 + 공식 홈 버튼) ======== */
+  .top-nav {
+    background: white;
+    padding: 12px 16px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    min-height: 44px;
+    background: var(--blush);
+    color: var(--terracotta);
+    border: 1px solid var(--rose-soft);
+    border-radius: 100px;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .nav-btn:hover { background: var(--rose-soft); transform: translateY(-1px); }
+  .nav-btn.primary {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    border-color: var(--rose-deep);
+  }
+  .nav-btn.primary:hover { box-shadow: var(--shadow-rose); }
+
+  /* ======== TOP STRIPS ======== */
+  .top-strip {
+    padding: 11px 20px;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+  }
+  .top-strip.primary {
+    background: linear-gradient(90deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+  }
+  .top-strip.secondary {
+    background: var(--blush);
+    color: var(--brown);
+    font-size: 12.5px;
+  }
+  .top-strip strong { font-weight: 700; }
+
+  /* ======== HERO ======== */
+  .hero {
+    background: linear-gradient(170deg, var(--blush) 0%, var(--peach) 40%, var(--rose-soft) 100%);
+    padding: 80px 24px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255, 216, 204, 0.6) 0%, transparent 60%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    bottom: -80px; left: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(244, 203, 199, 0.5) 0%, transparent 60%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 720px; margin: 0 auto;
+    position: relative; z-index: 1; text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 9px 22px;
+    background: white;
+    border-radius: 100px;
+    color: var(--terracotta);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--brown);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--terracotta);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--brown-soft);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.75;
+    font-weight: 500;
+  }
+  .hero-sub strong { color: var(--terracotta); font-weight: 700; }
+  .hero-dots {
+    display: flex; justify-content: center; gap: 10px;
+    margin-top: 20px;
+  }
+  .hero-dot {
+    width: 8px; height: 8px;
+    background: var(--rose-deep);
+    border-radius: 50%; opacity: 0.5;
+  }
+  .hero-dot.active { opacity: 1; transform: scale(1.3); }
+
+  /* ======== SECTION ======== */
+  section { padding: 72px 24px; position: relative; }
+  .container { max-width: 680px; margin: 0 auto; }
+  .section-head { text-align: center; margin-bottom: 48px; }
+  .section-head .overline {
+    display: inline-block;
+    color: var(--terracotta);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .section-head h2 {
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--brown);
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+  }
+  .section-head h2 em { font-style: normal; color: var(--terracotta); }
+  .section-head p {
+    margin-top: 14px;
+    color: var(--mute);
+    font-size: 15.5px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+  }
+
+  /* ======== BACK TO TOP BUTTON (all sections) ======== */
+  .back-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    min-height: 44px;
+    margin: 24px auto 0;
+    background: white;
+    color: var(--terracotta);
+    border: 1px solid var(--rose-soft);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .back-top:hover { background: var(--blush); }
+  .back-top-wrap { text-align: center; margin-top: 20px; }
+
+  /* ======== NOT SECTION ======== */
+  .not-section { background: var(--warm-white); }
+  .not-card {
+    background: white;
+    border: 2px solid var(--rose-soft);
+    border-radius: 24px;
+    padding: 36px 24px;
+    box-shadow: var(--shadow-md);
+  }
+  .not-title {
+    font-size: 22px;
+    color: var(--terracotta);
+    text-align: center;
+    margin-bottom: 8px;
+    font-weight: 800;
+  }
+  .not-sub {
+    text-align: center;
+    color: var(--mute);
+    font-size: 13.5px;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .not-items {
+    display: flex; flex-direction: column;
+    gap: 14px; margin-bottom: 28px;
+  }
+  .not-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+    background: var(--blush);
+    border-radius: 14px;
+  }
+  .not-x {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: var(--rose-deep); color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px;
+  }
+  .not-item-text {
+    font-size: 15px; color: var(--brown); font-weight: 600;
+  }
+  .not-item-text strong { color: var(--terracotta); font-weight: 800; }
+  .not-yes {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    padding: 22px 20px;
+    border-radius: 18px;
+    text-align: center;
+  }
+  .not-yes-label {
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    opacity: 0.9;
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .not-yes-text {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+  .not-yes-text em { font-style: normal; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+  /* ======== DIFFERENCE ======== */
+  .diff-section { background: var(--cream); }
+  .diff-intro {
+    text-align: center;
+    font-size: 15.5px;
+    color: var(--brown-soft);
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.75;
+    font-weight: 500;
+  }
+  .diff-cards { display: grid; gap: 14px; }
+  .diff-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 14px;
+    align-items: center;
+  }
+  .diff-card.special {
+    background: linear-gradient(135deg, white 0%, var(--blush) 100%);
+    border: 2px solid var(--rose);
+    box-shadow: var(--shadow-rose);
+  }
+  .diff-icon {
+    width: 48px; height: 48px;
+    background: var(--blush);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .diff-card.special .diff-icon { background: var(--rose); color: white; }
+  .diff-name {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--brown);
+    margin-bottom: 2px;
+  }
+  .diff-desc {
+    font-size: 13px;
+    color: var(--mute);
+    font-weight: 500;
+  }
+  .diff-status {
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 7px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .diff-status.bad { background: var(--blush); color: var(--terracotta); }
+  .diff-status.good { background: white; color: var(--rose-deep); border: 1.5px solid var(--rose); }
+  .diff-callout {
+    margin-top: 24px;
+    padding: 22px 20px;
+    background: linear-gradient(135deg, var(--peach) 0%, var(--rose-soft) 100%);
+    border-radius: 16px;
+    text-align: center;
+    color: var(--brown);
+    font-size: 15px;
+    line-height: 1.75;
+    font-weight: 500;
+  }
+  .diff-callout strong { color: var(--terracotta); font-weight: 800; }
+
+  /* ======== TIERS ======== */
+  .tier-section { background: var(--warm-white); }
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .tier-card {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 22px;
+    padding: 28px 18px;
+    text-align: center;
+    transition: transform 0.3s;
+    position: relative;
+  }
+  .tier-card.premium {
+    background: linear-gradient(160deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    border-color: var(--rose-deep);
+    box-shadow: var(--shadow-rose);
+  }
+  .tier-card:hover { transform: translateY(-4px); }
+  .tier-badge {
+    font-size: 12.5px;
+    color: var(--terracotta);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .tier-card.premium .tier-badge { color: rgba(255,255,255,0.95); }
+  .tier-name {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--brown);
+    margin-bottom: 18px;
+  }
+  .tier-card.premium .tier-name { color: white; }
+  .tier-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 3px;
+  }
+  .tier-currency { font-size: 18px; color: var(--terracotta); font-weight: 700; }
+  .tier-card.premium .tier-currency { color: rgba(255,255,255,0.9); }
+  .tier-amount {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--brown);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .tier-card.premium .tier-amount { color: white; }
+  .tier-period { font-size: 12.5px; color: var(--mute); margin-top: 4px; font-weight: 500; }
+  .tier-card.premium .tier-period { color: rgba(255,255,255,0.75); }
+  .tier-reward {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+  }
+  .tier-card.premium .tier-reward { border-color: rgba(255,255,255,0.3); }
+  .tier-reward-label { font-size: 12.5px; color: var(--mute); letter-spacing: 0.05em; font-weight: 600; }
+  .tier-card.premium .tier-reward-label { color: rgba(255,255,255,0.85); }
+  .tier-reward-amount {
+    display: block;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--terracotta);
+    margin-top: 4px;
+    letter-spacing: -0.03em;
+  }
+  .tier-card.premium .tier-reward-amount { color: white; }
+
+  /* ======== RULE ======== */
+  .rule-section { background: var(--cream); }
+  .rule-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 22px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--line);
+  }
+  .rule-title {
+    text-align: center;
+    font-size: 22px;
+    color: var(--brown);
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .rule-subtitle {
+    text-align: center;
+    color: var(--mute);
+    font-size: 14px;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .rule-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-radius: 14px;
+    overflow: hidden;
+    height: 76px;
+    box-shadow: var(--shadow-sm);
+  }
+  .rule-slice {
+    padding: 12px 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-size: 12.5px;
+  }
+  .rule-slice.green { background: linear-gradient(135deg, #8AB89C 0%, #6F9A82 100%); }
+  .rule-slice.yellow { background: linear-gradient(135deg, var(--gold-warm) 0%, #A8814B 100%); }
+  .rule-slice.red { background: linear-gradient(135deg, var(--terracotta) 0%, #A4554A 100%); }
+  .rule-days {
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .rule-status { font-size: 11.5px; line-height: 1.4; opacity: 0.95; font-weight: 600; }
+  .rule-marker {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: var(--mute);
+    font-weight: 600;
+  }
+  .rule-details {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rule-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--blush);
+    border-radius: 14px;
+    border-left: 3px solid var(--rose);
+  }
+  .rule-row.warn { background: #FEF4E6; border-left-color: var(--gold-warm); }
+  .rule-row.danger { background: #FFEBE8; border-left-color: var(--terracotta); }
+  .rule-row-emoji { font-size: 20px; line-height: 1.4; }
+  .rule-row-text {
+    font-size: 14px;
+    color: var(--brown);
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .rule-row-text strong { color: var(--terracotta); font-weight: 800; }
+
+  /* ======== FOREVER + 17% EXAMPLES (merged) ======== */
+  .forever-section {
+    background: linear-gradient(165deg, var(--rose-soft) 0%, var(--peach) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .forever-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top left, rgba(255,255,255,0.4) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .forever-card {
+    background: white;
+    border-radius: 28px;
+    padding: 32px 24px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .forever-icon-wrap {
+    width: 72px; height: 72px;
+    margin: -60px auto 20px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    box-shadow: var(--shadow-rose);
+    border: 5px solid white;
+  }
+  .forever-card h3 {
+    font-size: 26px;
+    color: var(--brown);
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    letter-spacing: -0.025em;
+  }
+  .forever-card h3 em { font-style: normal; color: var(--terracotta); }
+  .forever-card .lead {
+    font-size: 15px;
+    color: var(--brown-soft);
+    margin-bottom: 22px;
+    line-height: 1.75;
+    font-weight: 500;
+  }
+  .forever-benefit {
+    background: var(--blush);
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    text-align: left;
+  }
+  .benefit-num {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    background: white;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--terracotta);
+    box-shadow: var(--shadow-sm);
+  }
+  .benefit-text { font-size: 14.5px; color: var(--brown); line-height: 1.6; font-weight: 500; }
+  .benefit-text strong { color: var(--terracotta); font-weight: 800; }
+
+  /* Examples inside forever card */
+  .examples-divider {
+    margin: 28px 0 20px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--rose);
+    text-align: center;
+  }
+  .examples-title {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .examples-subtitle {
+    font-size: 13px;
+    color: var(--mute);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .example-card {
+    background: var(--warm-white);
+    border: 1.5px solid var(--rose-soft);
+    border-radius: 18px;
+    padding: 22px 18px;
+    margin-bottom: 14px;
+    text-align: left;
+  }
+  .example-card:last-child { margin-bottom: 0; }
+  .example-head {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .example-icon {
+    font-size: 28px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .example-title {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--brown);
+    line-height: 1.35;
+  }
+  .example-title .sub {
+    display: block;
+    font-size: 12.5px;
+    color: var(--mute);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .example-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 14px;
+  }
+  .example-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    font-size: 13.5px;
+    color: var(--brown);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .example-row.final {
+    padding-top: 8px;
+    border-top: 1px dashed var(--line);
+    font-weight: 700;
+    color: var(--brown);
+  }
+  .example-row strong { color: var(--terracotta); font-weight: 800; }
+  .example-highlight {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .example-highlight-label {
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .example-highlight-amount {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  .example-highlight-sub {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .example-note {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--blush);
+    border-radius: 10px;
+    font-size: 12.5px;
+    color: var(--brown);
+    line-height: 1.65;
+    font-weight: 500;
+  }
+  .example-note strong { color: var(--terracotta); font-weight: 800; }
+  .example-tip {
+    background: #FFF4E6;
+    border-left: 3px solid var(--gold-warm);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    color: var(--brown);
+    line-height: 1.65;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  .example-tip strong { color: var(--gold-warm); font-weight: 800; }
+  .example-disclaimer {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 11.5px;
+    color: var(--mute);
+    line-height: 1.65;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  /* ======== TIMELINE (redesigned - no numbers, no MONTH) ======== */
+  .timeline-section { background: var(--warm-white); padding-bottom: 100px; }
+  .path-choice {
+    background: linear-gradient(135deg, var(--blush) 0%, var(--cream) 100%);
+    border: 2px solid var(--rose-soft);
+    border-radius: 20px;
+    padding: 26px 22px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .path-choice-label {
+    color: var(--terracotta);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .path-choice h3 {
+    font-size: 22px;
+    color: var(--brown);
+    margin-bottom: 6px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .path-choice p {
+    font-size: 13.5px;
+    color: var(--brown-soft);
+    font-weight: 500;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--rose) 0%, var(--rose-deep) 50%, var(--terracotta) 100%);
+  }
+  .milestone {
+    position: relative;
+    padding-bottom: 36px;
+  }
+  .milestone:last-child { padding-bottom: 0; }
+  .milestone-dot {
+    position: absolute;
+    left: -25px;
+    top: 8px;
+    width: 16px; height: 16px;
+    background: var(--rose);
+    border: 3px solid var(--warm-white);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--rose);
+    z-index: 2;
+  }
+  .milestone-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brown);
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .milestone-body {
+    font-size: 14.5px;
+    color: var(--brown-soft);
+    line-height: 1.75;
+    font-weight: 500;
+  }
+  .milestone-body strong { color: var(--terracotta); font-weight: 700; }
+  .milestone-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .stat-chip {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 8px 14px;
+    font-size: 13px;
+    color: var(--brown);
+    box-shadow: var(--shadow-sm);
+    font-weight: 500;
+  }
+  .stat-chip strong {
+    font-size: 15px;
+    color: var(--terracotta);
+    font-weight: 800;
+  }
+
+  .tier-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .tier-row-card {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .tier-row-card.prem { border-color: var(--rose); background: var(--blush); }
+  .tier-row-label {
+    font-size: 12px;
+    color: var(--mute);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .tier-row-value {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--brown);
+    line-height: 1.35;
+  }
+  .tier-row-value .rew {
+    display: block;
+    color: var(--terracotta);
+    font-size: 14px;
+    margin-top: 2px;
+    font-weight: 800;
+  }
+
+  .auto-box {
+    background: #FFF4E6;
+    border-left: 3px solid var(--gold-warm);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--brown);
+    font-weight: 500;
+    line-height: 1.65;
+  }
+
+  /* Two booking methods (plans) */
+  .plan-card {
+    background: white;
+    border-left: 4px solid var(--rose);
+    border-radius: 8px 16px 16px 8px;
+    padding: 18px 18px;
+    box-shadow: var(--shadow-sm);
+    margin-top: 12px;
+  }
+  .plan-card.slow { border-left-color: var(--gold-warm); }
+  .plan-tag {
+    font-size: 12.5px;
+    color: var(--terracotta);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .plan-card.slow .plan-tag { color: var(--gold-warm); }
+  .plan-card h4 {
+    font-size: 17px;
+    color: var(--brown);
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+  .plan-card p {
+    font-size: 13.5px;
+    color: var(--brown-soft);
+    line-height: 1.7;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .plan-card p:last-child { margin-bottom: 0; }
+  .plan-list {
+    list-style: none;
+    padding: 12px 14px;
+    background: var(--blush);
+    border-radius: 10px;
+    margin: 10px 0;
+  }
+  .plan-list li {
+    font-size: 13px;
+    color: var(--brown);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.55;
+    font-weight: 500;
+  }
+  .plan-list li::before {
+    content: '▸';
+    color: var(--rose-deep);
+    position: absolute;
+    left: 0;
+    font-weight: 800;
+  }
+  .plan-list li strong { color: var(--terracotta); font-weight: 800; }
+  .plan-tip {
+    background: linear-gradient(135deg, var(--blush) 0%, var(--peach) 100%);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--brown);
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .plan-tip strong { color: var(--terracotta); font-weight: 800; }
+
+  /* ======== TRAINING ======== */
+  .training-section {
+    background: linear-gradient(170deg, var(--blush) 0%, var(--peach) 100%);
+  }
+  .training-split {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .split-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .split-card.no {
+    border: 2px dashed rgba(200,112,100,0.3);
+    background: rgba(255,255,255,0.6);
+  }
+  .split-card.yes {
+    border: 2px solid var(--rose);
+    box-shadow: var(--shadow-rose);
+  }
+  .split-tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .split-card.no .split-tag { background: var(--blush); color: var(--terracotta); }
+  .split-card.yes .split-tag { background: var(--rose); color: white; }
+  .split-card h4 {
+    font-size: 20px;
+    color: var(--brown);
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .split-card.no h4 { color: var(--mute); }
+  .split-card p {
+    font-size: 14px;
+    color: var(--brown-soft);
+    line-height: 1.75;
+    font-weight: 500;
+  }
+  .split-card.yes p strong { color: var(--terracotta); font-weight: 800; }
+
+  .training-info {
+    background: white;
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .training-info-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13.5px;
+    color: var(--brown);
+    line-height: 1.6;
+    font-weight: 500;
+  }
+  .training-info-row strong { color: var(--terracotta); font-weight: 800; }
+
+  /* ======== FREE ======== */
+  .free-section { background: var(--cream); }
+  .free-formula {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 22px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--line);
+  }
+  .formula-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .formula-box {
+    background: var(--blush);
+    border-radius: 14px;
+    padding: 18px 12px;
+    text-align: center;
+  }
+  .formula-box.highlight {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+  }
+  .formula-label {
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .formula-box.highlight .formula-label { color: rgba(255,255,255,0.9); }
+  .formula-value {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--brown);
+  }
+  .formula-box.highlight .formula-value { color: white; }
+  .formula-unit {
+    font-size: 12px;
+    color: var(--mute);
+    margin-top: 4px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .formula-box.highlight .formula-unit { color: rgba(255,255,255,0.8); }
+  .formula-op {
+    font-size: 22px;
+    color: var(--rose);
+    font-weight: 800;
+  }
+  .formula-note {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px;
+    text-align: center;
+    color: var(--brown);
+    line-height: 1.75;
+    font-weight: 500;
+  }
+  .formula-note strong { color: var(--terracotta); font-weight: 800; }
+  .bonus-callout {
+    margin-top: 16px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, var(--peach) 0%, var(--rose-soft) 100%);
+    border-radius: 14px;
+    font-size: 14px;
+    color: var(--brown);
+    text-align: center;
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .bonus-callout strong { color: var(--terracotta); font-weight: 800; }
+
+  /* ======== SAFETY ======== */
+  .safety-section { background: var(--warm-white); }
+  .safety-card {
+    background: white;
+    border: 2px solid var(--rose);
+    border-radius: 24px;
+    padding: 36px 24px 28px;
+    box-shadow: var(--shadow-rose);
+    position: relative;
+  }
+  .safety-card::before {
+    content: '🔒';
+    position: absolute;
+    top: -22px; left: 50%;
+    transform: translateX(-50%);
+    width: 48px; height: 48px;
+    background: white;
+    border: 2px solid var(--rose);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .safety-card h3 {
+    text-align: center;
+    font-size: 24px;
+    color: var(--brown);
+    font-weight: 800;
+    margin: 14px 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .safety-card .sub {
+    text-align: center;
+    color: var(--terracotta);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+  .safety-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .safety-item {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--navy);
+    font-weight: 600;
+    border: 1px solid var(--line);
+  }
+  .safety-item strong {
+    display: block;
+    font-size: 19px;
+    font-weight: 900;
+    margin-bottom: 2px;
+    color: var(--brown);
+    letter-spacing: -0.02em;
+  }
+  .safety-bottom {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 16px 16px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .safety-bottom strong { font-weight: 800; }
+
+  /* ======== CLOSING ======== */
+  .closing {
+    background: linear-gradient(180deg, var(--warm-white) 0%, var(--blush) 100%);
+    text-align: center;
+    padding: 80px 24px;
+  }
+  .closing-mark {
+    font-size: 52px;
+    color: var(--rose);
+    line-height: 1;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+  .closing h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--brown);
+    line-height: 1.35;
+    margin-bottom: 18px;
+    letter-spacing: -0.025em;
+  }
+  .closing h2 em { font-style: normal; color: var(--terracotta); }
+  .closing p {
+    font-size: 15px;
+    color: var(--brown-soft);
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.85;
+    font-weight: 500;
+  }
+
+  /* ======== FOOTER ======== */
+  footer {
+    background: white;
+    padding: 36px 24px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    min-height: 44px;
+    background: var(--blush);
+    color: var(--terracotta);
+    border: 1px solid var(--rose-soft);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .footer-link:hover { background: var(--rose-soft); }
+  .footer-link.primary {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    border-color: var(--rose-deep);
+  }
+  .footer-small {
+    font-size: 12.5px;
+    line-height: 1.75;
+    max-width: 440px;
+    margin: 0 auto;
+    color: var(--mute);
+    font-weight: 500;
+  }
+  .footer-divider {
+    width: 32px;
+    height: 2px;
+    background: var(--rose);
+    margin: 16px auto;
+    border-radius: 2px;
+  }
+
+  /* ======== FLOATING BACK-TO-TOP ======== */
+  .float-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: var(--shadow-rose);
+    z-index: 50;
+    font-weight: 800;
+  }
+  .float-top.show { display: flex; }
+
+  /* ======== RESPONSIVE ======== */
+  @media (max-width: 520px) {
+    .top-nav { padding: 10px 12px; }
+    .nav-btn { padding: 9px 14px; font-size: 12.5px; }
+    .hero { padding: 60px 20px 80px; }
+    .hero h1 { font-size: 38px; }
+    .hero-sub { font-size: 15px; }
+    section { padding: 58px 20px; }
+    .section-head h2 { font-size: 27px; }
+    .tiers { grid-template-columns: 1fr; }
+    .tier-amount { font-size: 48px; }
+    .formula-row { grid-template-columns: 1fr; gap: 8px; }
+    .formula-op { transform: rotate(90deg); font-size: 20px; }
+    .safety-grid { grid-template-columns: 1fr; }
+    .forever-card h3 { font-size: 22px; }
+    .diff-card {
+      grid-template-columns: 42px 1fr;
+      grid-template-rows: auto auto;
+    }
+    .diff-status { grid-column: 1 / -1; justify-self: start; }
+    .closing h2 { font-size: 22px; }
+    .rule-days { font-size: 15px; }
+    .rule-status { font-size: 11px; }
+    .rule-bar { height: 82px; }
+    .example-highlight-amount { font-size: 26px; }
+    .tier-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 32px; }
+    .section-head h2 { font-size: 23px; }
+    .milestone-title { font-size: 19px; }
+    .nav-btn { font-size: 11.5px; padding: 8px 12px; }
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  a, button { min-height: 44px; }
+</style>
+</head>
+<body id="top">
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a class="nav-btn" href="https://drive.google.com/file/d/1OffbttO7M2Q68ecqEEJSMiLZYgOwkuQr/view?usp=drive_link" target="_blank" rel="noopener">
+    📄 회사 소개
+  </a>
+  <a class="nav-btn" href="https://drive.google.com/file/d/1aBU7bfPgmGc2arr2BKEitg2hiMYvdFcT/view?usp=drive_link" target="_blank" rel="noopener">
+    📋 멤버십 약관
+  </a>
+  <a class="nav-btn primary" href="https://incruises.com" target="_blank" rel="noopener">
+    🌐 공식 홈페이지
+  </a>
+</nav>
+
+<!-- TOP STRIPS -->
+<div class="top-strip primary">
+  ✨ <strong>내 여행의 주인공은 나</strong> · 스스로 만드는 나만의 여정
+</div>
+<div class="top-strip secondary">
+  📱 <strong>1기기 1계정</strong> · 개인정보 보호를 위한 필수 원칙이에요!
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🛳️ Cruise Club</div>
+    <h1>크루즈,<br>이제는 <em>구독해요</em></h1>
+    <p class="hero-sub">
+      매달 쌓이는 리워드가 <strong>크루즈가 되는</strong>,<br>
+      새로운 방식의 여행 구독
+    </p>
+    <div class="hero-dots">
+      <span class="hero-dot active"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+    </div>
+  </div>
+</div>
+
+<!-- NOT SECTION -->
+<section class="not-section" id="before-start">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Before You Start · 시작하기 전에</span>
+      <h2>이 세 가지 꼭<br><em>알고 가세요!!</em> 🙌</h2>
+      <p>시작하기 전에, 이 멤버십이 어떻게 운영되는지 알려드릴게요!</p>
+    </div>
+
+    <div class="not-card reveal">
+      <div class="not-title">오해하면 안 되는 3가지</div>
+      <div class="not-sub">Three Important Clarifications</div>
+
+      <div class="not-items">
+        <div class="not-item">
+          <div class="not-x">✕</div>
+          <div class="not-item-text"><strong>여행사가 아닙니다.</strong> 예약을 대신해 드리지 않아요</div>
+        </div>
+        <div class="not-item">
+          <div class="not-x">✕</div>
+          <div class="not-item-text"><strong>상조가 아닙니다.</strong> 여행을 대비하는 적금 상품이 아니에요</div>
+        </div>
+        <div class="not-item">
+          <div class="not-x">✕</div>
+          <div class="not-item-text"><strong>현금 환급이 안 됩니다.</strong> 저금이라고 생각하면 안 돼요</div>
+        </div>
+      </div>
+
+      <div class="not-yes">
+        <div class="not-yes-label">What It Actually Is</div>
+        <div class="not-yes-text">
+          월 구독 멤버십 서비스입니다.<br>
+          크루즈와 호텔을 <em>직구 가격</em>으로 직접 예약하고<br>
+          할인받을 수 있는 혜택을 구독하는 거예요.
+        </div>
+      </div>
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENCE -->
+<section class="diff-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">The Big Difference</span>
+      <h2>다른 <em>구독</em>과<br>무엇이 다른가요?</h2>
+    </div>
+
+    <p class="diff-intro reveal">
+      우리가 매달 내는 많은 구독료들,<br>안 쓰면 그냥 사라지죠.<br>
+      그런데 이 멤버십은 조금 달라요.
+    </p>
+
+    <div class="diff-cards reveal">
+      <div class="diff-card">
+        <div class="diff-icon">🏋️</div>
+        <div>
+          <div class="diff-name">헬스장</div>
+          <div class="diff-desc">안 가면 그 달 돈은 그냥 사라짐</div>
+        </div>
+        <div class="diff-status bad">소멸</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">📺</div>
+        <div>
+          <div class="diff-name">넷플릭스</div>
+          <div class="diff-desc">안 보면 그 달 돈은 그냥 사라짐</div>
+        </div>
+        <div class="diff-status bad">소멸</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🎵</div>
+        <div>
+          <div class="diff-name">음악 스트리밍</div>
+          <div class="diff-desc">안 들으면 그 달 돈은 그냥 사라짐</div>
+        </div>
+        <div class="diff-status bad">소멸</div>
+      </div>
+      <div class="diff-card special">
+        <div class="diff-icon">🛳️</div>
+        <div>
+          <div class="diff-name">이 멤버십</div>
+          <div class="diff-desc">내가 낸 돈이 계정에 계속 쌓임</div>
+        </div>
+        <div class="diff-status good">적립</div>
+      </div>
+    </div>
+
+    <div class="diff-callout reveal">
+      <strong>내가 낸 돈이 사라지지 않고 계정에 평생 유지됩니다.</strong><br>
+      이 돈으로 크루즈와 호텔을 17% 기본 할인받아 예약할 수 있어요.
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="tier-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Step One · Your Entry</span>
+      <h2>어떤 <em>멤버십</em>으로<br>시작할까요?</h2>
+      <p>두 가지 플랜 중 선택하세요. 언제든 업그레이드가 가능하며, 프리미엄 회원의 경우 1회에 한해 다운그레이드가 가능합니다.</p>
+    </div>
+
+    <div class="tiers reveal">
+      <div class="tier-card">
+        <div class="tier-badge">Classic</div>
+        <div class="tier-name">클래식</div>
+        <div class="tier-price">
+          <span class="tier-currency">$</span>
+          <span class="tier-amount">100</span>
+        </div>
+        <div class="tier-period">per month</div>
+        <div class="tier-reward">
+          <span class="tier-reward-label">정시 납부 시 월 적립</span>
+          <span class="tier-reward-amount">$200</span>
+        </div>
+      </div>
+      <div class="tier-card premium">
+        <div class="tier-badge">Premium</div>
+        <div class="tier-name">프리미엄</div>
+        <div class="tier-price">
+          <span class="tier-currency">$</span>
+          <span class="tier-amount">250</span>
+        </div>
+        <div class="tier-period">per month</div>
+        <div class="tier-reward">
+          <span class="tier-reward-label">정시 납부 시 월 적립</span>
+          <span class="tier-reward-amount">$500</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2X RULE -->
+<section class="rule-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">The 2× Reward Rule</span>
+      <h2>2배 리워드의 <em>비밀</em>은<br>정시 납부예요</h2>
+      <p>청구서가 발행된 후 언제 내느냐에 따라 달라져요</p>
+    </div>
+
+    <div class="rule-card reveal">
+      <div class="rule-title">납부 타이밍 가이드</div>
+      <div class="rule-subtitle">청구서 발행일 기준</div>
+
+      <div class="rule-bar">
+        <div class="rule-slice green">
+          <div class="rule-days">1–5일</div>
+          <div class="rule-status">2배 리워드 ✨</div>
+        </div>
+        <div class="rule-slice yellow">
+          <div class="rule-days">6–30일</div>
+          <div class="rule-status">1배 적립</div>
+        </div>
+        <div class="rule-slice red">
+          <div class="rule-days">30일 초과</div>
+          <div class="rule-status">비활성화 ⚠️</div>
+        </div>
+      </div>
+      <div class="rule-marker">
+        <span>발행일</span>
+        <span>5일</span>
+        <span>30일 →</span>
+      </div>
+
+      <div class="rule-details">
+        <div class="rule-row">
+          <div class="rule-row-emoji">✨</div>
+          <div class="rule-row-text">
+            <strong>5일 이내 납부:</strong> 구독료의 <strong>2배</strong>가 리워드로 적립됩니다. 이게 최대 혜택이에요.
+          </div>
+        </div>
+        <div class="rule-row warn">
+          <div class="rule-row-emoji">⏱️</div>
+          <div class="rule-row-text">
+            <strong>5일 이후 ~ 30일 이내:</strong> 납입한 금액만큼 적립됩니다.
+          </div>
+        </div>
+        <div class="rule-row danger">
+          <div class="rule-row-emoji">🚫</div>
+          <div class="rule-row-text">
+            <strong>30일 초과:</strong> 계정이 <strong>비활성화</strong>됩니다. 자동이체 설정을 추천해요.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOREVER + 17% EXAMPLES -->
+<section class="forever-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Forever Yours</span>
+      <h2>내가 낸 돈은 <em>평생</em><br>계정에 남아요</h2>
+      <p>현금 환급은 되지 않지만, 적립된 금액은 없어지지 않고 계속 유지됩니다</p>
+    </div>
+
+    <div class="forever-card reveal">
+      <div class="forever-icon-wrap">🌸</div>
+      <h3>내가 낸 돈은 <em>평생</em><br>계정에 남아요</h3>
+      <p class="lead">
+        현금 환급은 되지 않지만,<br>
+        적립된 금액은 없어지지 않고 계속 유지됩니다.
+      </p>
+
+      <div class="forever-benefit">
+        <div class="benefit-num">1</div>
+        <div class="benefit-text">
+          내가 낸 돈만큼 <strong>계정에 평생 유지</strong>돼요
+        </div>
+      </div>
+      <div class="forever-benefit">
+        <div class="benefit-num">2</div>
+        <div class="benefit-text">
+          모든 예약에 <strong>17% 기본 접근 할인</strong>
+        </div>
+      </div>
+      <div class="forever-benefit">
+        <div class="benefit-num">3</div>
+        <div class="benefit-text">
+          적립금으로 <strong>크루즈와 호텔 직접 예약</strong>
+        </div>
+      </div>
+
+      <!-- 17% Examples inside the card -->
+      <div class="examples-divider">
+        <div class="examples-title">✨ 17% 할인, 실제로 얼마일까요?</div>
+        <div class="examples-subtitle">진짜 예시로 체감해보세요</div>
+      </div>
+
+      <!-- Cruise example -->
+      <div class="example-card">
+        <div class="example-head">
+          <div class="example-icon">🚢</div>
+          <div class="example-title">
+            지중해 크루즈
+            <span class="sub">7박 8일 · 발코니룸 · 가족 4인 (성인 2 + 아이 2)</span>
+          </div>
+        </div>
+
+        <div class="example-table">
+          <div class="example-row">
+            <span>일반 예약가 (4인)</span>
+            <span>$3,600 · 약 540만 원</span>
+          </div>
+          <div class="example-row final">
+            <span>🎉 내가 내는 금액</span>
+            <span><strong>$2,988 · 약 448만 원</strong></span>
+          </div>
+          <div class="example-row">
+            <span>👤 1인당</span>
+            <span>$747 · 약 112만 원</span>
+          </div>
+        </div>
+
+        <div class="example-highlight">
+          <div class="example-highlight-label">💰 17% 할인 절약액</div>
+          <div class="example-highlight-amount">약 92만 원</div>
+          <div class="example-highlight-sub">(−$612)</div>
+        </div>
+
+        <div class="example-note">
+          <strong>가족 4인이 약 92만 원 절약!</strong> 클래식 멤버십 월 $100 (약 15만 원) 기준으로 <strong>약 6개월치 구독료</strong>가 한 번에 회수되는 셈이에요.
+        </div>
+      </div>
+
+      <!-- Hotel example -->
+      <div class="example-card">
+        <div class="example-head">
+          <div class="example-icon">🏨</div>
+          <div class="example-title">
+            호텔 3박
+            <span class="sub">1박 $300 · 2인 1실 기준</span>
+          </div>
+        </div>
+
+        <div class="example-tip" style="margin-top: 0; margin-bottom: 14px;">
+          💡 <strong>해외 호텔은 물론, 한국 호텔도 예약 가능!</strong><br>
+          단, 검색할 때는 <strong>영문 도시명</strong>으로 찾아야 해요.<br>
+          (예: 서울 → Seoul, 제주 → Jeju, 부산 → Busan)
+        </div>
+
+        <div class="example-table">
+          <div class="example-row">
+            <span>일반 예약가 ($300 × 3박)</span>
+            <span>$900 · 약 135만 원</span>
+          </div>
+          <div class="example-row final">
+            <span>🎉 내가 내는 금액</span>
+            <span><strong>$747 · 약 112만 원</strong></span>
+          </div>
+        </div>
+
+        <div class="example-highlight">
+          <div class="example-highlight-label">💰 17% 할인 절약액</div>
+          <div class="example-highlight-amount">약 23만 원</div>
+          <div class="example-highlight-sub">(−$153)</div>
+        </div>
+
+        <div class="example-note">
+          <strong>3박 짧은 여행 한 번에도 약 23만 원 절약!</strong> 국내 호캉스부터 해외 출장까지, 연 2~3회 여행하면 할인 혜택만으로도 연간 멤버십 비용을 충분히 회수할 수 있어요.
+        </div>
+      </div>
+
+      <div class="example-disclaimer">
+        ※ 환율은 1 USD = 1,500원 기준 예시입니다. 실제 환율은 결제 시점에 따라 달라질 수 있어요.<br>
+        ※ 상품 가격은 예시이며, 실제 예약 시 시즌·선실·호텔 등급에 따라 달라집니다.<br>
+        ※ 자세한 규정은 <a href="https://drive.google.com/file/d/1aBU7bfPgmGc2arr2BKEitg2hiMYvdFcT/view?usp=drive_link" target="_blank" style="color: var(--terracotta); font-weight: 700;">멤버십 약관</a>을 참고해주세요.
+      </div>
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Design Your Own Plan</span>
+      <h2>내 플랜은<br><em>내가 설계</em>해요</h2>
+      <p>나에게 맞는 속도와 방식으로 플랜을 설계해보세요</p>
+    </div>
+
+    <div class="path-choice reveal">
+      <div class="path-choice-label">My Own Plan</div>
+      <h3>내 속도로, 내 방식으로</h3>
+      <p>아래 단계를 따라 나만의 크루즈 플랜을 그려보세요</p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- 단계 1: 여정의 시작 -->
+      <div class="milestone reveal">
+        <div class="milestone-dot"></div>
+        <h3 class="milestone-title">🌱 여정의 시작 — 가입</h3>
+        <p class="milestone-body">
+          클래식 또는 프리미엄을 선택해 <strong>본인 명의</strong>로 가입합니다. 이 순간부터 매월 리워드가 쌓이기 시작해요.
+        </p>
+        <div class="tier-row">
+          <div class="tier-row-card">
+            <div class="tier-row-label">💎 클래식 멤버</div>
+            <div class="tier-row-value">월 $100
+              <span class="rew">→ 200 리워드 적립</span>
+            </div>
+          </div>
+          <div class="tier-row-card prem">
+            <div class="tier-row-label">🌟 프리미엄 멤버</div>
+            <div class="tier-row-value">월 $250
+              <span class="rew">→ 500 리워드 적립</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 단계 2: 회사와 멤버의 약속 -->
+      <div class="milestone reveal">
+        <div class="milestone-dot"></div>
+        <h3 class="milestone-title">🤝 회사와 멤버의 약속</h3>
+        <p class="milestone-body">
+          <strong>청구서 발행일 5일 이내</strong> 구독료 납부 시 → <strong>2배 리워드가 적립</strong>됩니다.
+        </p>
+        <div class="auto-box">
+          💳 <strong>신용카드 2개 이상 자동이체 설정</strong>을 추천드려요. 한 카드에 문제가 생겨도 다른 카드로 자동 결제되어 안전합니다.
+        </div>
+      </div>
+
+      <!-- 단계 3: 두 가지 예약 방법 -->
+      <div class="milestone reveal">
+        <div class="milestone-dot"></div>
+        <h3 class="milestone-title">🛤️ 두 가지 예약 방법</h3>
+        <p class="milestone-body">두 가지 예약 방법 중 나에게 맞는 경로를 선택합니다.</p>
+
+        <div class="plan-card">
+          <div class="plan-tag">💳 리워드 + 카드 결제</div>
+          <h4>가입 즉시 30일 이후 상품부터 예약 가능</h4>
+          <ul class="plan-list">
+            <li><strong>30~59일 상품 예약 시</strong> → 2개월 구독료 선결제</li>
+            <li><strong>60~90일 상품 예약 시</strong> → 1개월 구독료 선결제</li>
+            <li><strong>90일 이후 상품 예약 시</strong> → 최대 ~50% 리워드 사용 가능</li>
+          </ul>
+          <div class="plan-tip">
+            👉 <strong>가입 후 3개월 이내에도 크루즈 예약이 가능해요!</strong><br>
+            출발을 3개월 후에 하는 게 아니라, <strong>예약을 빨리 할수록 금액이 저렴해지고 혜택이 늘어납니다.</strong>
+          </div>
+        </div>
+
+        <div class="plan-card slow">
+          <div class="plan-tag">🏆 올 리워드 결제</div>
+          <h4>9개월 (270일) 이후 상품부터<br>올 리워드로 예약 가능</h4>
+          <div class="plan-tip" style="background: #FFF4E6;">
+            👉 <strong>꾸준히 리워드 모으기 — 올 리워드 예약 준비</strong><br>
+            꾸준히 적립해 충분한 리워드를 보유하고, <strong>현금 결제 없이 리워드로만 예약</strong>하고 싶으신 분들께 추천드려요.
+          </div>
+        </div>
+      </div>
+
+      <!-- 단계 4: 승선까지 유지 -->
+      <div class="milestone reveal">
+        <div class="milestone-dot"></div>
+        <h3 class="milestone-title">⚓ 승선까지 유지 구간</h3>
+        <p class="milestone-body">
+          크루즈를 예약한 뒤에도 <strong>승선 시점까지 멤버십을 유지</strong>해야 해요. 대신 그 기간에도 <strong>2배 리워드는 계속 쌓입니다</strong>.
+        </p>
+      </div>
+
+      <!-- 단계 5: 승선 -->
+      <div class="milestone reveal">
+        <div class="milestone-dot"></div>
+        <h3 class="milestone-title">✈️ 승선 — 마침내 떠나는 날</h3>
+        <p class="milestone-body">
+          승선 이후에는 <strong>자유롭게 멤버십을 종료</strong>할 수 있어요. 단, <strong>적립된 리워드와 계정은 그대로 유지</strong>됩니다.
+        </p>
+        <div class="plan-tip" style="margin-top: 14px;">
+          🛳️ <strong>30일 이후 상품을 예약해</strong> 탑승 후 멤버십을 종료할 수도 있고,<br>
+          🛳️ 꾸준히 유지하며 <strong>더 많은 크루즈를 탑승</strong>할 수도 있어요.<br>
+          🛳️ <strong>올 리워드 예약 + 리워드+카드 결제 조합</strong>으로 크루즈를 연속 예약하실 수도 있습니다.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="training-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">The Right Way</span>
+      <h2><em>스스로</em> 하는 것,<br>어렵지 않아요</h2>
+      <p>혼자 헤매는 게 아니에요. 배울 수 있는 구조가 있어요.</p>
+    </div>
+
+    <div class="training-split reveal">
+      <div class="split-card no">
+        <span class="split-tag">What We Don't Do</span>
+        <h4>대신 해드리지 않아요</h4>
+        <p>우리는 여행사가 아닙니다. 예약을 대신해 드리거나, 타인의 계정·카드·기기로 결제하는 일은 하지 않아요. 개인 멤버십이기 때문이에요.</p>
+      </div>
+
+      <div class="split-card yes">
+        <span class="split-tag">What You Can Get</span>
+        <h4>함께 배울 수 있어요</h4>
+        <p>예약 방법이 궁금하면 <strong>트레이닝</strong>을 받을 수 있어요. 한 번 배우면 스스로 크루즈도, 호텔도 직접 예약할 수 있게 돼요. <strong>이게 진짜 실력</strong>이 되는 거죠.</p>
+
+        <div class="training-info">
+          <div class="training-info-row">
+            📺 <span><strong>매주 화·목 줌 강의</strong>에서 배우실 수 있어요</span>
+          </div>
+          <div class="training-info-row">
+            💬 <span><strong>네이버 밴드 및 단체 카톡방 커뮤니티</strong>에서 정보를 공유받으실 수 있어요</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diff-callout reveal" style="background: white; border: 1px solid var(--rose);">
+      <strong>개인 멤버십이에요.</strong><br>
+      본인이 직접 알아보고, 본인이 본인의 멤버십을 관리하는 것<br>
+      — 그게 가장 중요합니다.
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- FREE MEMBERSHIP -->
+<section class="free-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Going Further</span>
+      <h2>무료 멤버십으로<br>가는 <em>길</em></h2>
+      <p>파트너 자격 + 구독자 $500 유지 시 — 내 멤버십 $100이 면제되는 구조</p>
+    </div>
+
+    <div class="free-formula reveal">
+      <div class="formula-row">
+        <div class="formula-box">
+          <div class="formula-label">Step 1</div>
+          <div class="formula-value">파트너 자격</div>
+          <div class="formula-unit">$95 / 6개월 갱신</div>
+        </div>
+        <div class="formula-op">+</div>
+        <div class="formula-box">
+          <div class="formula-label">Step 2</div>
+          <div class="formula-value">내 전용 링크로<br>구독자 $500 모으기</div>
+          <div class="formula-unit">프리미엄 $250 × 2명<br>or 클래식 $100 × 5명</div>
+        </div>
+      </div>
+
+      <div class="formula-row" style="margin-bottom: 0;">
+        <div class="formula-box highlight" style="grid-column: 1 / -1;">
+          <div class="formula-label">Result</div>
+          <div class="formula-value" style="font-size: 19px;">내 구독료 $100 면제<br>+ $200 리워드 계속 적립</div>
+        </div>
+      </div>
+
+      <div class="formula-note">
+        <strong>프리미엄 회원</strong>은 $250 − $100 = <strong>$150 납부 시 500 리워드</strong>가 적립됩니다.
+      </div>
+    </div>
+
+    <div class="bonus-callout reveal">
+      🎁 <strong>파트너 자격이 있어야<br>5가지 보너스와 인센티브를 받을 수 있어요!</strong>
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="safety-section">
+  <div class="container">
+    <div class="safety-card reveal">
+      <div class="sub" style="margin-top: 20px;">Non-Negotiable Principles</div>
+      <h3>반드시 지켜야 할 원칙</h3>
+
+      <div class="safety-grid">
+        <div class="safety-item"><strong>본인</strong>기기</div>
+        <div class="safety-item"><strong>본인</strong>카드</div>
+        <div class="safety-item"><strong>본인</strong>계정</div>
+        <div class="safety-item"><strong>본인</strong>관리</div>
+      </div>
+
+      <div class="safety-bottom">
+        <strong>스스로 관리하는 것이 원칙이에요.</strong><br>
+        가입·결제·계정 조작은 반드시 본인이 직접.<br>
+        방법이 궁금하면 <strong>트레이닝</strong>으로 배울 수 있어요.
+      </div>
+    </div>
+
+    <div class="back-top-wrap">
+      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="container">
+    <div class="closing-mark reveal">❞</div>
+    <h2 class="reveal">
+      매달 내는 돈이 <em>사라지지 않는</em><br>
+      첫 번째 구독
+    </h2>
+    <p class="reveal">
+      저금이 아니라, 여행의 가능성을 쌓는 일이에요.<br>
+      스스로 관리하고, 직접 예약하고, 나답게 떠나는 것.<br>
+      이것이 Cruise Club의 방식입니다.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a class="footer-link" href="https://drive.google.com/file/d/1OffbttO7M2Q68ecqEEJSMiLZYgOwkuQr/view?usp=drive_link" target="_blank" rel="noopener">
+      📄 회사 소개
+    </a>
+    <a class="footer-link" href="https://drive.google.com/file/d/1aBU7bfPgmGc2arr2BKEitg2hiMYvdFcT/view?usp=drive_link" target="_blank" rel="noopener">
+      📋 멤버십 약관
+    </a>
+    <a class="footer-link primary" href="https://incruises.com" target="_blank" rel="noopener">
+      🌐 공식 홈페이지
+    </a>
+  </div>
+  <p class="footer-small">
+    이 플랜은 inCruises 멤버십의 일반적 구조를 기반으로 합니다.<br>
+    실제 혜택과 규정은 시점에 따라 변동될 수 있으니<br>
+    가입 전 공식 약관을 반드시 확인하세요.
+  </p>
+  <div class="footer-divider"></div>
+  <p class="footer-small" style="opacity: 0.7;">
+    Personal Membership · Not a Travel Agency · Not a Savings Plan
+  </p>
+</footer>
+
+<!-- Floating back-to-top -->
+<button class="float-top" id="floatTop" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="맨 위로">⬆</button>
+
+<script>
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Floating button
+  const floatBtn = document.getElementById('floatTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) floatBtn.classList.add('show');
+    else floatBtn.classList.remove('show');
+  });
+</script>
+
+</body>
+</html>
