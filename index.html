@@ -20,7 +20,6 @@
     --ink: #3E2E28;
     --mute: #8A7168;
     --gold-warm: #C9A06B;
-    --green: #7BA98C;
     --line: rgba(200, 112, 100, 0.15);
     --shadow-sm: 0 2px 10px rgba(200, 112, 100, 0.08);
     --shadow-md: 0 8px 28px rgba(200, 112, 100, 0.14);
@@ -31,10 +30,10 @@
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Gulim', '굴림', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-family: 'Gulim', '굴림', 'Malgun Gothic', '맑은 고딕', AppleGothic, sans-serif;
     background: var(--cream);
     color: var(--ink);
-    line-height: 1.8;
+    line-height: 1.85;
     word-break: keep-all;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -43,10 +42,26 @@
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
   }
 
-  /* ======== TOP NAV (회사 소개 + 공식 홈 버튼) ======== */
+  /* ======== VIDEO TOP ======== */
+  .video-top {
+    background: #000;
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+  }
+  .video-top iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  /* ======== TOP NAV ======== */
   .top-nav {
     background: white;
     padding: 12px 16px;
@@ -70,29 +85,27 @@
     color: var(--terracotta);
     border: 1px solid var(--rose-soft);
     border-radius: 100px;
-    font-size: 13.5px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     text-decoration: none;
     transition: all 0.2s;
-    font-family: inherit;
     cursor: pointer;
+    font-family: inherit;
   }
-  .nav-btn:hover { background: var(--rose-soft); transform: translateY(-1px); }
+  .nav-btn:hover { background: var(--rose-soft); }
   .nav-btn.primary {
     background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
     color: white;
     border-color: var(--rose-deep);
   }
-  .nav-btn.primary:hover { box-shadow: var(--shadow-rose); }
 
   /* ======== TOP STRIPS ======== */
   .top-strip {
-    padding: 11px 20px;
+    padding: 12px 20px;
     text-align: center;
-    font-size: 13.5px;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    line-height: 1.5;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.55;
   }
   .top-strip.primary {
     background: linear-gradient(90deg, var(--rose) 0%, var(--rose-deep) 100%);
@@ -101,14 +114,14 @@
   .top-strip.secondary {
     background: var(--blush);
     color: var(--brown);
-    font-size: 12.5px;
+    font-size: 13.5px;
   }
-  .top-strip strong { font-weight: 700; }
+  .top-strip strong { font-weight: 800; }
 
   /* ======== HERO ======== */
   .hero {
     background: linear-gradient(170deg, var(--blush) 0%, var(--peach) 40%, var(--rose-soft) 100%);
-    padding: 80px 24px 100px;
+    padding: 70px 24px 90px;
     position: relative;
     overflow: hidden;
   }
@@ -119,80 +132,74 @@
     background: radial-gradient(circle, rgba(255, 216, 204, 0.6) 0%, transparent 60%);
     border-radius: 50%; pointer-events: none;
   }
-  .hero::after {
-    content: ''; position: absolute;
-    bottom: -80px; left: -80px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(244, 203, 199, 0.5) 0%, transparent 60%);
-    border-radius: 50%; pointer-events: none;
-  }
   .hero-inner {
     max-width: 720px; margin: 0 auto;
     position: relative; z-index: 1; text-align: center;
   }
   .hero-badge {
     display: inline-block;
-    padding: 9px 22px;
+    padding: 10px 24px;
     background: white;
     border-radius: 100px;
     color: var(--terracotta);
-    font-size: 13.5px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 800;
     letter-spacing: 0.14em;
     margin-bottom: 28px;
     box-shadow: var(--shadow-sm);
   }
   .hero h1 {
-    font-size: 52px;
-    font-weight: 800;
-    line-height: 1.15;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.2;
     letter-spacing: -0.03em;
     color: var(--brown);
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
-  .hero h1 em {
-    font-style: normal;
-    color: var(--terracotta);
-  }
+  .hero h1 em { font-style: normal; color: var(--terracotta); }
   .hero-sub {
     font-size: 17px;
     color: var(--brown-soft);
     max-width: 520px;
-    margin: 0 auto 36px;
-    line-height: 1.75;
-    font-weight: 500;
+    margin: 0 auto 24px;
+    line-height: 1.8;
+    font-weight: 600;
   }
-  .hero-sub strong { color: var(--terracotta); font-weight: 700; }
-  .hero-dots {
-    display: flex; justify-content: center; gap: 10px;
-    margin-top: 20px;
+  .hero-sub strong { color: var(--terracotta); font-weight: 800; }
+
+  .hero-mileage {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 14px 22px;
+    background: white;
+    border-radius: 100px;
+    box-shadow: var(--shadow-md);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.6;
   }
-  .hero-dot {
-    width: 8px; height: 8px;
-    background: var(--rose-deep);
-    border-radius: 50%; opacity: 0.5;
-  }
-  .hero-dot.active { opacity: 1; transform: scale(1.3); }
+  .hero-mileage strong { color: var(--terracotta); font-weight: 800; }
 
   /* ======== SECTION ======== */
-  section { padding: 72px 24px; position: relative; }
+  section { padding: 64px 22px; }
   .container { max-width: 680px; margin: 0 auto; }
-  .section-head { text-align: center; margin-bottom: 48px; }
+  .section-head { text-align: center; margin-bottom: 44px; }
   .section-head .overline {
     display: inline-block;
     color: var(--terracotta);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 12px;
   }
   .section-head h2 {
-    font-size: 34px;
-    font-weight: 800;
+    font-size: 32px;
+    font-weight: 900;
     color: var(--brown);
     letter-spacing: -0.025em;
-    line-height: 1.25;
+    line-height: 1.3;
   }
   .section-head h2 em { font-style: normal; color: var(--terracotta); }
   .section-head p {
@@ -202,29 +209,9 @@
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    font-weight: 500;
-  }
-
-  /* ======== BACK TO TOP BUTTON (all sections) ======== */
-  .back-top {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 18px;
-    min-height: 44px;
-    margin: 24px auto 0;
-    background: white;
-    color: var(--terracotta);
-    border: 1px solid var(--rose-soft);
-    border-radius: 100px;
-    font-size: 13px;
     font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-    font-family: inherit;
+    line-height: 1.7;
   }
-  .back-top:hover { background: var(--blush); }
-  .back-top-wrap { text-align: center; margin-top: 20px; }
 
   /* ======== NOT SECTION ======== */
   .not-section { background: var(--warm-white); }
@@ -232,7 +219,7 @@
     background: white;
     border: 2px solid var(--rose-soft);
     border-radius: 24px;
-    padding: 36px 24px;
+    padding: 32px 22px;
     box-shadow: var(--shadow-md);
   }
   .not-title {
@@ -240,18 +227,19 @@
     color: var(--terracotta);
     text-align: center;
     margin-bottom: 8px;
-    font-weight: 800;
+    font-weight: 900;
   }
   .not-sub {
     text-align: center;
     color: var(--mute);
     font-size: 13.5px;
-    margin-bottom: 28px;
-    font-weight: 500;
+    margin-bottom: 26px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
   }
   .not-items {
     display: flex; flex-direction: column;
-    gap: 14px; margin-bottom: 28px;
+    gap: 12px; margin-bottom: 26px;
   }
   .not-item {
     display: flex; align-items: center; gap: 14px;
@@ -265,12 +253,13 @@
     background: var(--rose-deep); color: white;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 16px;
+    font-weight: 900; font-size: 16px;
   }
   .not-item-text {
-    font-size: 15px; color: var(--brown); font-weight: 600;
+    font-size: 15px; color: var(--brown); font-weight: 700;
+    line-height: 1.6;
   }
-  .not-item-text strong { color: var(--terracotta); font-weight: 800; }
+  .not-item-text strong { color: var(--terracotta); font-weight: 900; }
   .not-yes {
     background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
     color: white;
@@ -282,16 +271,22 @@
     font-size: 12.5px;
     letter-spacing: 0.14em;
     opacity: 0.9;
-    margin-bottom: 8px;
-    font-weight: 700;
+    margin-bottom: 10px;
+    font-weight: 800;
     text-transform: uppercase;
   }
   .not-yes-text {
-    font-size: 18px;
+    font-size: 16.5px;
     font-weight: 700;
-    line-height: 1.55;
+    line-height: 1.7;
   }
-  .not-yes-text em { font-style: normal; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .not-yes-text em {
+    font-style: normal;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    font-weight: 900;
+  }
 
   /* ======== DIFFERENCE ======== */
   .diff-section { background: var(--cream); }
@@ -300,15 +295,15 @@
     font-size: 15.5px;
     color: var(--brown-soft);
     max-width: 500px;
-    margin: 0 auto 32px;
-    line-height: 1.75;
-    font-weight: 500;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+    font-weight: 600;
   }
-  .diff-cards { display: grid; gap: 14px; }
+  .diff-cards { display: grid; gap: 12px; }
   .diff-card {
     background: white;
     border-radius: 18px;
-    padding: 22px 20px;
+    padding: 20px 18px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--line);
     display: grid;
@@ -330,37 +325,80 @@
   }
   .diff-card.special .diff-icon { background: var(--rose); color: white; }
   .diff-name {
-    font-size: 17px;
-    font-weight: 800;
+    font-size: 16.5px;
+    font-weight: 900;
     color: var(--brown);
     margin-bottom: 2px;
   }
   .diff-desc {
     font-size: 13px;
     color: var(--mute);
-    font-weight: 500;
+    font-weight: 600;
   }
   .diff-status {
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: 800;
     padding: 7px 12px;
     border-radius: 100px;
     white-space: nowrap;
   }
   .diff-status.bad { background: var(--blush); color: var(--terracotta); }
   .diff-status.good { background: white; color: var(--rose-deep); border: 1.5px solid var(--rose); }
-  .diff-callout {
-    margin-top: 24px;
-    padding: 22px 20px;
-    background: linear-gradient(135deg, var(--peach) 0%, var(--rose-soft) 100%);
-    border-radius: 16px;
+
+  /* Big stats callout */
+  .diff-stats {
+    margin-top: 20px;
+    background: white;
+    border: 2px solid var(--rose);
+    border-radius: 20px;
+    padding: 24px 20px;
     text-align: center;
-    color: var(--brown);
-    font-size: 15px;
-    line-height: 1.75;
-    font-weight: 500;
+    box-shadow: var(--shadow-sm);
   }
-  .diff-callout strong { color: var(--terracotta); font-weight: 800; }
+  .diff-stats-intro {
+    font-size: 15px;
+    color: var(--brown);
+    font-weight: 700;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .diff-stats-intro strong { color: var(--terracotta); font-weight: 900; }
+  .diff-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .diff-stat-card {
+    background: linear-gradient(135deg, var(--blush) 0%, var(--peach) 100%);
+    border-radius: 16px;
+    padding: 18px 12px;
+    text-align: center;
+  }
+  .diff-stat-icon { font-size: 26px; line-height: 1; margin-bottom: 6px; }
+  .diff-stat-number {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--terracotta);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  .diff-stat-label {
+    font-size: 12.5px;
+    color: var(--brown);
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .diff-stats-footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rose);
+    font-size: 14.5px;
+    color: var(--brown);
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .diff-stats-footer strong { color: var(--terracotta); font-weight: 900; }
 
   /* ======== TIERS ======== */
   .tier-section { background: var(--warm-white); }
@@ -376,7 +414,6 @@
     padding: 28px 18px;
     text-align: center;
     transition: transform 0.3s;
-    position: relative;
   }
   .tier-card.premium {
     background: linear-gradient(160deg, var(--rose) 0%, var(--rose-deep) 100%);
@@ -388,17 +425,17 @@
   .tier-badge {
     font-size: 12.5px;
     color: var(--terracotta);
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-bottom: 6px;
-    font-weight: 700;
+    margin-bottom: 8px;
+    font-weight: 800;
   }
   .tier-card.premium .tier-badge { color: rgba(255,255,255,0.95); }
   .tier-name {
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 24px;
+    font-weight: 900;
     color: var(--brown);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
   .tier-card.premium .tier-name { color: white; }
   .tier-price {
@@ -407,17 +444,22 @@
     justify-content: center;
     gap: 3px;
   }
-  .tier-currency { font-size: 18px; color: var(--terracotta); font-weight: 700; }
+  .tier-currency { font-size: 18px; color: var(--terracotta); font-weight: 800; }
   .tier-card.premium .tier-currency { color: rgba(255,255,255,0.9); }
   .tier-amount {
-    font-size: 56px;
+    font-size: 52px;
     font-weight: 900;
     color: var(--brown);
     line-height: 1;
     letter-spacing: -0.04em;
   }
   .tier-card.premium .tier-amount { color: white; }
-  .tier-period { font-size: 12.5px; color: var(--mute); margin-top: 4px; font-weight: 500; }
+  .tier-period {
+    font-size: 13px;
+    color: var(--mute);
+    margin-top: 4px;
+    font-weight: 600;
+  }
   .tier-card.premium .tier-period { color: rgba(255,255,255,0.75); }
   .tier-reward {
     margin-top: 18px;
@@ -425,17 +467,34 @@
     border-top: 1px dashed var(--line);
   }
   .tier-card.premium .tier-reward { border-color: rgba(255,255,255,0.3); }
-  .tier-reward-label { font-size: 12.5px; color: var(--mute); letter-spacing: 0.05em; font-weight: 600; }
+  .tier-reward-label {
+    font-size: 12.5px;
+    color: var(--mute);
+    font-weight: 700;
+  }
   .tier-card.premium .tier-reward-label { color: rgba(255,255,255,0.85); }
   .tier-reward-amount {
     display: block;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 900;
     color: var(--terracotta);
-    margin-top: 4px;
-    letter-spacing: -0.03em;
+    margin-top: 6px;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
   }
   .tier-card.premium .tier-reward-amount { color: white; }
+  .tier-note {
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: var(--blush);
+    border-radius: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--brown);
+    font-weight: 600;
+    line-height: 1.65;
+  }
+  .tier-note strong { color: var(--terracotta); font-weight: 800; }
 
   /* ======== RULE ======== */
   .rule-section { background: var(--cream); }
@@ -448,24 +507,24 @@
   }
   .rule-title {
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     color: var(--brown);
-    font-weight: 800;
+    font-weight: 900;
     margin-bottom: 6px;
   }
   .rule-subtitle {
     text-align: center;
     color: var(--mute);
-    font-size: 14px;
-    margin-bottom: 28px;
-    font-weight: 500;
+    font-size: 13.5px;
+    margin-bottom: 26px;
+    font-weight: 600;
   }
   .rule-bar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     border-radius: 14px;
     overflow: hidden;
-    height: 76px;
+    height: 80px;
     box-shadow: var(--shadow-sm);
   }
   .rule-slice {
@@ -475,7 +534,6 @@
     flex-direction: column;
     justify-content: center;
     color: white;
-    font-size: 12.5px;
   }
   .rule-slice.green { background: linear-gradient(135deg, #8AB89C 0%, #6F9A82 100%); }
   .rule-slice.yellow { background: linear-gradient(135deg, var(--gold-warm) 0%, #A8814B 100%); }
@@ -484,20 +542,24 @@
     font-size: 17px;
     font-weight: 900;
     line-height: 1;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
     letter-spacing: -0.02em;
   }
-  .rule-status { font-size: 11.5px; line-height: 1.4; opacity: 0.95; font-weight: 600; }
+  .rule-status {
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 700;
+  }
   .rule-marker {
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
-    font-size: 11.5px;
+    font-size: 12px;
     color: var(--mute);
-    font-weight: 600;
+    font-weight: 700;
   }
   .rule-details {
-    margin-top: 26px;
+    margin-top: 24px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -517,26 +579,21 @@
   .rule-row-text {
     font-size: 14px;
     color: var(--brown);
-    line-height: 1.7;
-    font-weight: 500;
+    line-height: 1.75;
+    font-weight: 600;
   }
-  .rule-row-text strong { color: var(--terracotta); font-weight: 800; }
+  .rule-row-text strong { color: var(--terracotta); font-weight: 900; }
 
-  /* ======== FOREVER + 17% EXAMPLES (merged) ======== */
+  /* ======== FOREVER ======== */
   .forever-section {
     background: linear-gradient(165deg, var(--rose-soft) 0%, var(--peach) 100%);
     position: relative;
     overflow: hidden;
   }
-  .forever-section::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at top left, rgba(255,255,255,0.4) 0%, transparent 50%);
-    pointer-events: none;
-  }
   .forever-card {
     background: white;
     border-radius: 28px;
-    padding: 32px 24px;
+    padding: 32px 22px;
     box-shadow: var(--shadow-lg);
     position: relative;
     z-index: 1;
@@ -553,11 +610,11 @@
     border: 5px solid white;
   }
   .forever-card h3 {
-    font-size: 26px;
+    font-size: 25px;
     color: var(--brown);
-    font-weight: 800;
-    line-height: 1.3;
-    margin-bottom: 10px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 12px;
     letter-spacing: -0.025em;
   }
   .forever-card h3 em { font-style: normal; color: var(--terracotta); }
@@ -565,8 +622,8 @@
     font-size: 15px;
     color: var(--brown-soft);
     margin-bottom: 22px;
-    line-height: 1.75;
-    font-weight: 500;
+    line-height: 1.8;
+    font-weight: 600;
   }
   .forever-benefit {
     background: var(--blush);
@@ -589,26 +646,32 @@
     color: var(--terracotta);
     box-shadow: var(--shadow-sm);
   }
-  .benefit-text { font-size: 14.5px; color: var(--brown); line-height: 1.6; font-weight: 500; }
-  .benefit-text strong { color: var(--terracotta); font-weight: 800; }
+  .benefit-text {
+    font-size: 14.5px;
+    color: var(--brown);
+    line-height: 1.65;
+    font-weight: 600;
+  }
+  .benefit-text strong { color: var(--terracotta); font-weight: 900; }
 
   /* Examples inside forever card */
   .examples-divider {
-    margin: 28px 0 20px;
+    margin: 28px 0 18px;
     padding-top: 24px;
     border-top: 1px dashed var(--rose);
     text-align: center;
   }
   .examples-title {
-    font-size: 19px;
-    font-weight: 800;
+    font-size: 20px;
+    font-weight: 900;
     color: var(--brown);
     margin-bottom: 6px;
+    letter-spacing: -0.02em;
   }
   .examples-subtitle {
-    font-size: 13px;
+    font-size: 13.5px;
     color: var(--mute);
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 20px;
   }
   .example-card {
@@ -622,7 +685,7 @@
   .example-card:last-child { margin-bottom: 0; }
   .example-head {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: flex-start;
     margin-bottom: 14px;
   }
@@ -632,17 +695,17 @@
     flex-shrink: 0;
   }
   .example-title {
-    font-size: 15.5px;
-    font-weight: 800;
+    font-size: 16px;
+    font-weight: 900;
     color: var(--brown);
-    line-height: 1.35;
+    line-height: 1.4;
   }
   .example-title .sub {
     display: block;
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--mute);
-    font-weight: 500;
-    margin-top: 2px;
+    font-weight: 600;
+    margin-top: 3px;
   }
   .example-table {
     display: flex;
@@ -660,78 +723,78 @@
     font-size: 13.5px;
     color: var(--brown);
     line-height: 1.5;
-    font-weight: 500;
+    font-weight: 600;
   }
   .example-row.final {
     padding-top: 8px;
     border-top: 1px dashed var(--line);
-    font-weight: 700;
-    color: var(--brown);
+    font-weight: 800;
   }
-  .example-row strong { color: var(--terracotta); font-weight: 800; }
+  .example-row strong { color: var(--terracotta); font-weight: 900; }
   .example-highlight {
     background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
     color: white;
     border-radius: 14px;
-    padding: 18px 16px;
+    padding: 20px 16px;
     text-align: center;
   }
   .example-highlight-label {
-    font-size: 12.5px;
+    font-size: 13px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    opacity: 0.9;
-    margin-bottom: 6px;
-    font-weight: 700;
+    opacity: 0.95;
+    margin-bottom: 8px;
+    font-weight: 800;
   }
   .example-highlight-amount {
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 900;
     line-height: 1.1;
     letter-spacing: -0.03em;
   }
   .example-highlight-sub {
-    font-size: 13px;
+    font-size: 13.5px;
     opacity: 0.9;
     margin-top: 4px;
-    font-weight: 500;
+    font-weight: 700;
   }
   .example-note {
     margin-top: 12px;
-    padding: 10px 12px;
+    padding: 12px 14px;
     background: var(--blush);
     border-radius: 10px;
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--brown);
-    line-height: 1.65;
-    font-weight: 500;
+    line-height: 1.7;
+    font-weight: 600;
   }
-  .example-note strong { color: var(--terracotta); font-weight: 800; }
+  .example-note strong { color: var(--terracotta); font-weight: 900; }
   .example-tip {
     background: #FFF4E6;
     border-left: 3px solid var(--gold-warm);
-    padding: 12px 14px;
+    padding: 14px 14px;
     border-radius: 10px;
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--brown);
-    line-height: 1.65;
+    line-height: 1.7;
     margin-top: 10px;
-    font-weight: 500;
+    font-weight: 600;
   }
-  .example-tip strong { color: var(--gold-warm); font-weight: 800; }
+  .example-tip strong { color: var(--gold-warm); font-weight: 900; }
   .example-disclaimer {
     margin-top: 18px;
     padding-top: 14px;
     border-top: 1px dashed var(--line);
-    font-size: 11.5px;
+    font-size: 12px;
     color: var(--mute);
-    line-height: 1.65;
+    line-height: 1.75;
     text-align: left;
-    font-weight: 500;
+    font-weight: 600;
   }
+  .example-disclaimer a { color: var(--terracotta); font-weight: 800; }
 
-  /* ======== TIMELINE (redesigned - no numbers, no MONTH) ======== */
-  .timeline-section { background: var(--warm-white); padding-bottom: 100px; }
+  /* ======== TIMELINE ======== */
+  .timeline-section { background: var(--warm-white); padding-bottom: 90px; }
   .path-choice {
     background: linear-gradient(135deg, var(--blush) 0%, var(--cream) 100%);
     border: 2px solid var(--rose-soft);
@@ -742,23 +805,23 @@
   }
   .path-choice-label {
     color: var(--terracotta);
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     font-size: 12px;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 800;
   }
   .path-choice h3 {
     font-size: 22px;
     color: var(--brown);
-    margin-bottom: 6px;
-    font-weight: 800;
+    margin-bottom: 8px;
+    font-weight: 900;
     letter-spacing: -0.02em;
   }
   .path-choice p {
-    font-size: 13.5px;
+    font-size: 14px;
     color: var(--brown-soft);
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .timeline {
@@ -791,41 +854,20 @@
     z-index: 2;
   }
   .milestone-title {
-    font-size: 22px;
-    font-weight: 800;
+    font-size: 21px;
+    font-weight: 900;
     color: var(--brown);
-    line-height: 1.3;
+    line-height: 1.35;
     margin-bottom: 12px;
     letter-spacing: -0.02em;
   }
   .milestone-body {
     font-size: 14.5px;
     color: var(--brown-soft);
-    line-height: 1.75;
-    font-weight: 500;
+    line-height: 1.8;
+    font-weight: 600;
   }
-  .milestone-body strong { color: var(--terracotta); font-weight: 700; }
-  .milestone-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-  }
-  .stat-chip {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 100px;
-    padding: 8px 14px;
-    font-size: 13px;
-    color: var(--brown);
-    box-shadow: var(--shadow-sm);
-    font-weight: 500;
-  }
-  .stat-chip strong {
-    font-size: 15px;
-    color: var(--terracotta);
-    font-weight: 800;
-  }
+  .milestone-body strong { color: var(--terracotta); font-weight: 800; }
 
   .tier-row {
     display: grid;
@@ -842,22 +884,22 @@
   }
   .tier-row-card.prem { border-color: var(--rose); background: var(--blush); }
   .tier-row-label {
-    font-size: 12px;
+    font-size: 12.5px;
     color: var(--mute);
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-weight: 700;
+    margin-bottom: 5px;
   }
   .tier-row-value {
     font-size: 15px;
-    font-weight: 800;
+    font-weight: 900;
     color: var(--brown);
-    line-height: 1.35;
+    line-height: 1.4;
   }
   .tier-row-value .rew {
     display: block;
     color: var(--terracotta);
-    font-size: 14px;
-    margin-top: 2px;
+    font-size: 13.5px;
+    margin-top: 3px;
     font-weight: 800;
   }
 
@@ -865,15 +907,16 @@
     background: #FFF4E6;
     border-left: 3px solid var(--gold-warm);
     border-radius: 10px;
-    padding: 12px 14px;
+    padding: 13px 14px;
     margin-top: 14px;
-    font-size: 13px;
+    font-size: 13.5px;
     color: var(--brown);
-    font-weight: 500;
-    line-height: 1.65;
+    font-weight: 600;
+    line-height: 1.75;
   }
+  .auto-box strong { color: var(--gold-warm); font-weight: 900; }
 
-  /* Two booking methods (plans) */
+  /* Plans */
   .plan-card {
     background: white;
     border-left: 4px solid var(--rose);
@@ -886,61 +929,112 @@
   .plan-tag {
     font-size: 12.5px;
     color: var(--terracotta);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 900;
     margin-bottom: 4px;
   }
   .plan-card.slow .plan-tag { color: var(--gold-warm); }
   .plan-card h4 {
     font-size: 17px;
     color: var(--brown);
-    font-weight: 800;
+    font-weight: 900;
     margin-bottom: 10px;
-    line-height: 1.35;
+    line-height: 1.4;
   }
   .plan-card p {
     font-size: 13.5px;
     color: var(--brown-soft);
-    line-height: 1.7;
+    line-height: 1.75;
     margin-bottom: 10px;
-    font-weight: 500;
+    font-weight: 600;
   }
   .plan-card p:last-child { margin-bottom: 0; }
   .plan-list {
     list-style: none;
-    padding: 12px 14px;
+    padding: 13px 14px;
     background: var(--blush);
     border-radius: 10px;
     margin: 10px 0;
   }
   .plan-list li {
-    font-size: 13px;
+    font-size: 13.5px;
     color: var(--brown);
     padding: 4px 0;
-    padding-left: 16px;
+    padding-left: 18px;
     position: relative;
-    line-height: 1.55;
-    font-weight: 500;
+    line-height: 1.65;
+    font-weight: 600;
   }
   .plan-list li::before {
     content: '▸';
     color: var(--rose-deep);
     position: absolute;
     left: 0;
-    font-weight: 800;
+    font-weight: 900;
   }
-  .plan-list li strong { color: var(--terracotta); font-weight: 800; }
+  .plan-list li strong { color: var(--terracotta); font-weight: 900; }
   .plan-tip {
     background: linear-gradient(135deg, var(--blush) 0%, var(--peach) 100%);
-    padding: 12px 14px;
+    padding: 14px 14px;
     border-radius: 10px;
-    font-size: 13px;
+    font-size: 13.5px;
     color: var(--brown);
-    line-height: 1.7;
-    font-weight: 500;
+    line-height: 1.75;
+    font-weight: 600;
+    margin-top: 10px;
   }
-  .plan-tip strong { color: var(--terracotta); font-weight: 800; }
+  .plan-tip strong { color: var(--terracotta); font-weight: 900; }
+
+  /* Two-step formula box */
+  .step-box {
+    background: linear-gradient(135deg, var(--rose-soft) 0%, var(--peach) 100%);
+    border-radius: 14px;
+    padding: 16px 16px;
+    margin-top: 12px;
+  }
+  .step-box-title {
+    font-size: 13.5px;
+    font-weight: 900;
+    color: var(--terracotta);
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .step-row {
+    background: white;
+    border-radius: 10px;
+    padding: 11px 14px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--brown);
+    font-weight: 600;
+  }
+  .step-row:last-child { margin-bottom: 0; }
+  .step-row strong { color: var(--terracotta); font-weight: 900; }
+  .step-row .tag {
+    display: inline-block;
+    background: var(--rose);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 800;
+    margin-right: 6px;
+    letter-spacing: 0.03em;
+  }
+  .step-example {
+    background: rgba(201, 112, 100, 0.08);
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--brown);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.6;
+  }
 
   /* ======== TRAINING ======== */
   .training-section {
@@ -949,7 +1043,7 @@
   .training-split {
     display: grid;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
   .split-card {
     background: white;
@@ -968,36 +1062,36 @@
   .split-tag {
     display: inline-block;
     font-size: 12px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 5px 10px;
+    padding: 5px 11px;
     border-radius: 100px;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 800;
   }
   .split-card.no .split-tag { background: var(--blush); color: var(--terracotta); }
   .split-card.yes .split-tag { background: var(--rose); color: white; }
   .split-card h4 {
     font-size: 20px;
     color: var(--brown);
-    font-weight: 800;
-    margin-bottom: 8px;
+    font-weight: 900;
+    margin-bottom: 10px;
     letter-spacing: -0.02em;
   }
   .split-card.no h4 { color: var(--mute); }
   .split-card p {
     font-size: 14px;
     color: var(--brown-soft);
-    line-height: 1.75;
-    font-weight: 500;
+    line-height: 1.8;
+    font-weight: 600;
   }
-  .split-card.yes p strong { color: var(--terracotta); font-weight: 800; }
+  .split-card.yes p strong { color: var(--terracotta); font-weight: 900; }
 
   .training-info {
     background: white;
     border-radius: 14px;
     padding: 14px 16px;
-    margin-top: 12px;
+    margin-top: 14px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1008,10 +1102,23 @@
     align-items: flex-start;
     font-size: 13.5px;
     color: var(--brown);
-    line-height: 1.6;
-    font-weight: 500;
+    line-height: 1.65;
+    font-weight: 600;
   }
-  .training-info-row strong { color: var(--terracotta); font-weight: 800; }
+  .training-info-row strong { color: var(--terracotta); font-weight: 900; }
+
+  .training-callout {
+    background: white;
+    border: 1.5px solid var(--rose);
+    border-radius: 14px;
+    padding: 18px 18px;
+    text-align: center;
+    color: var(--brown);
+    font-size: 14.5px;
+    line-height: 1.75;
+    font-weight: 600;
+  }
+  .training-callout strong { color: var(--terracotta); font-weight: 900; }
 
   /* ======== FREE ======== */
   .free-section { background: var(--cream); }
@@ -1040,57 +1147,79 @@
     color: white;
   }
   .formula-label {
-    font-size: 11.5px;
-    letter-spacing: 0.12em;
+    font-size: 12px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--terracotta);
-    margin-bottom: 6px;
-    font-weight: 700;
+    margin-bottom: 8px;
+    font-weight: 800;
   }
   .formula-box.highlight .formula-label { color: rgba(255,255,255,0.9); }
   .formula-value {
-    font-size: 17px;
-    font-weight: 800;
-    line-height: 1.3;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.45;
     color: var(--brown);
   }
   .formula-box.highlight .formula-value { color: white; }
   .formula-unit {
-    font-size: 12px;
+    font-size: 12.5px;
     color: var(--mute);
-    margin-top: 4px;
-    line-height: 1.5;
-    font-weight: 500;
+    margin-top: 5px;
+    line-height: 1.55;
+    font-weight: 600;
   }
   .formula-box.highlight .formula-unit { color: rgba(255,255,255,0.8); }
   .formula-op {
     font-size: 22px;
     color: var(--rose);
-    font-weight: 800;
+    font-weight: 900;
   }
   .formula-note {
     margin-top: 18px;
     padding-top: 18px;
     border-top: 1px dashed var(--line);
-    font-size: 13px;
+    font-size: 13.5px;
     text-align: center;
     color: var(--brown);
-    line-height: 1.75;
-    font-weight: 500;
+    line-height: 1.8;
+    font-weight: 600;
   }
-  .formula-note strong { color: var(--terracotta); font-weight: 800; }
+  .formula-note strong { color: var(--terracotta); font-weight: 900; }
   .bonus-callout {
     margin-top: 16px;
-    padding: 16px 18px;
+    padding: 18px 18px;
     background: linear-gradient(135deg, var(--peach) 0%, var(--rose-soft) 100%);
     border-radius: 14px;
-    font-size: 14px;
+    font-size: 14.5px;
     color: var(--brown);
     text-align: center;
     line-height: 1.7;
-    font-weight: 500;
+    font-weight: 700;
   }
-  .bonus-callout strong { color: var(--terracotta); font-weight: 800; }
+  .bonus-callout strong { color: var(--terracotta); font-weight: 900; }
+
+  .discount-btn-wrap {
+    margin-top: 18px;
+    text-align: center;
+  }
+  .discount-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    min-height: 50px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    color: white;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: var(--shadow-rose);
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .discount-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
   /* ======== SAFETY ======== */
   .safety-section { background: var(--warm-white); }
@@ -1119,18 +1248,18 @@
     text-align: center;
     font-size: 24px;
     color: var(--brown);
-    font-weight: 800;
+    font-weight: 900;
     margin: 14px 0 6px;
     letter-spacing: -0.02em;
   }
   .safety-card .sub {
     text-align: center;
     color: var(--terracotta);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     font-size: 12px;
     margin-bottom: 24px;
-    font-weight: 700;
+    font-weight: 800;
   }
   .safety-grid {
     display: grid;
@@ -1141,11 +1270,11 @@
   .safety-item {
     background: var(--cream);
     border-radius: 12px;
-    padding: 14px 10px;
+    padding: 15px 10px;
     text-align: center;
     font-size: 13.5px;
-    color: var(--navy);
-    font-weight: 600;
+    color: var(--brown);
+    font-weight: 700;
     border: 1px solid var(--line);
   }
   .safety-item strong {
@@ -1153,7 +1282,7 @@
     font-size: 19px;
     font-weight: 900;
     margin-bottom: 2px;
-    color: var(--brown);
+    color: var(--terracotta);
     letter-spacing: -0.02em;
   }
   .safety-bottom {
@@ -1163,29 +1292,29 @@
     padding: 16px 16px;
     font-size: 14px;
     text-align: center;
-    line-height: 1.7;
-    font-weight: 500;
+    line-height: 1.75;
+    font-weight: 600;
   }
-  .safety-bottom strong { font-weight: 800; }
+  .safety-bottom strong { font-weight: 900; }
 
   /* ======== CLOSING ======== */
   .closing {
     background: linear-gradient(180deg, var(--warm-white) 0%, var(--blush) 100%);
     text-align: center;
-    padding: 80px 24px;
+    padding: 76px 24px;
   }
   .closing-mark {
     font-size: 52px;
     color: var(--rose);
     line-height: 1;
     margin-bottom: 20px;
-    font-weight: 800;
+    font-weight: 900;
   }
   .closing h2 {
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 27px;
+    font-weight: 900;
     color: var(--brown);
-    line-height: 1.35;
+    line-height: 1.4;
     margin-bottom: 18px;
     letter-spacing: -0.025em;
   }
@@ -1195,8 +1324,8 @@
     color: var(--brown-soft);
     max-width: 440px;
     margin: 0 auto;
-    line-height: 1.85;
-    font-weight: 500;
+    line-height: 1.9;
+    font-weight: 600;
   }
 
   /* ======== FOOTER ======== */
@@ -1223,8 +1352,8 @@
     color: var(--terracotta);
     border: 1px solid var(--rose-soft);
     border-radius: 100px;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 13.5px;
+    font-weight: 800;
     text-decoration: none;
     transition: all 0.2s;
   }
@@ -1236,11 +1365,11 @@
   }
   .footer-small {
     font-size: 12.5px;
-    line-height: 1.75;
+    line-height: 1.85;
     max-width: 440px;
     margin: 0 auto;
     color: var(--mute);
-    font-weight: 500;
+    font-weight: 600;
   }
   .footer-divider {
     width: 32px;
@@ -1267,19 +1396,20 @@
     cursor: pointer;
     box-shadow: var(--shadow-rose);
     z-index: 50;
-    font-weight: 800;
+    font-weight: 900;
   }
   .float-top.show { display: flex; }
 
   /* ======== RESPONSIVE ======== */
   @media (max-width: 520px) {
-    .top-nav { padding: 10px 12px; }
+    .top-nav { padding: 10px 12px; gap: 6px; }
     .nav-btn { padding: 9px 14px; font-size: 12.5px; }
-    .hero { padding: 60px 20px 80px; }
-    .hero h1 { font-size: 38px; }
+    .hero { padding: 56px 20px 76px; }
+    .hero h1 { font-size: 36px; }
     .hero-sub { font-size: 15px; }
-    section { padding: 58px 20px; }
-    .section-head h2 { font-size: 27px; }
+    .hero-mileage { font-size: 13px; padding: 12px 18px; }
+    section { padding: 56px 18px; }
+    .section-head h2 { font-size: 26px; }
     .tiers { grid-template-columns: 1fr; }
     .tier-amount { font-size: 48px; }
     .formula-row { grid-template-columns: 1fr; gap: 8px; }
@@ -1291,16 +1421,17 @@
       grid-template-rows: auto auto;
     }
     .diff-status { grid-column: 1 / -1; justify-self: start; }
+    .diff-stats-grid { grid-template-columns: 1fr; }
     .closing h2 { font-size: 22px; }
     .rule-days { font-size: 15px; }
     .rule-status { font-size: 11px; }
-    .rule-bar { height: 82px; }
-    .example-highlight-amount { font-size: 26px; }
+    .rule-bar { height: 88px; }
+    .example-highlight-amount { font-size: 28px; }
     .tier-row { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 360px) {
-    .hero h1 { font-size: 32px; }
+    .hero h1 { font-size: 30px; }
     .section-head h2 { font-size: 23px; }
     .milestone-title { font-size: 19px; }
     .nav-btn { font-size: 11.5px; padding: 8px 12px; }
@@ -1312,14 +1443,21 @@
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
   a, button { min-height: 44px; }
 </style>
 </head>
 <body id="top">
+
+<!-- YOUTUBE VIDEO (muted autoplay loop) -->
+<div class="video-top">
+  <iframe
+    src="https://www.youtube.com/embed/xOodUATanks?autoplay=1&mute=1&loop=1&playlist=xOodUATanks&controls=1&rel=0&modestbranding=1&playsinline=1"
+    title="Cruise Club 소개 영상"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
 
 <!-- TOP NAV -->
 <nav class="top-nav">
@@ -1351,16 +1489,15 @@
       매달 쌓이는 리워드가 <strong>크루즈가 되는</strong>,<br>
       새로운 방식의 여행 구독
     </p>
-    <div class="hero-dots">
-      <span class="hero-dot active"></span>
-      <span class="hero-dot"></span>
-      <span class="hero-dot"></span>
+    <div class="hero-mileage">
+      💳 내가 납입한 구독료가 <strong>2배 리워드</strong>가 되어<br>
+      ✈️ <strong>마일리지처럼</strong> 적립돼요
     </div>
   </div>
 </div>
 
 <!-- NOT SECTION -->
-<section class="not-section" id="before-start">
+<section class="not-section">
   <div class="container">
     <div class="section-head reveal">
       <span class="overline">Before You Start · 시작하기 전에</span>
@@ -1395,10 +1532,6 @@
           할인받을 수 있는 혜택을 구독하는 거예요.
         </div>
       </div>
-    </div>
-
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
     </div>
   </div>
 </section>
@@ -1445,19 +1578,33 @@
         <div class="diff-icon">🛳️</div>
         <div>
           <div class="diff-name">이 멤버십</div>
-          <div class="diff-desc">내가 낸 돈이 계정에 계속 쌓임</div>
+          <div class="diff-desc">내가 낸 구독료가 계정에 계속 쌓임</div>
         </div>
         <div class="diff-status good">적립</div>
       </div>
     </div>
 
-    <div class="diff-callout reveal">
-      <strong>내가 낸 돈이 사라지지 않고 계정에 평생 유지됩니다.</strong><br>
-      이 돈으로 크루즈와 호텔을 17% 기본 할인받아 예약할 수 있어요.
-    </div>
-
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    <div class="diff-stats reveal">
+      <div class="diff-stats-intro">
+        <strong>내가 낸 구독료는 (사라지지 않고)</strong><br>
+        평생 내 계정에 남아 있어요.
+      </div>
+      <div class="diff-stats-grid">
+        <div class="diff-stat-card">
+          <div class="diff-stat-icon">🛳️</div>
+          <div class="diff-stat-number">21,000+</div>
+          <div class="diff-stat-label">크루즈 상품</div>
+        </div>
+        <div class="diff-stat-card">
+          <div class="diff-stat-icon">🏨</div>
+          <div class="diff-stat-number">300,000+</div>
+          <div class="diff-stat-label">전 세계 호텔</div>
+        </div>
+      </div>
+      <div class="diff-stats-footer">
+        적립된 리워드로 <strong>17% 할인</strong>받아<br>
+        직접 예약할 수 있어요 ✨
+      </div>
     </div>
   </div>
 </section>
@@ -1482,7 +1629,7 @@
         <div class="tier-period">per month</div>
         <div class="tier-reward">
           <span class="tier-reward-label">정시 납부 시 월 적립</span>
-          <span class="tier-reward-amount">$200</span>
+          <span class="tier-reward-amount">200 리워드<br>포인트</span>
         </div>
       </div>
       <div class="tier-card premium">
@@ -1495,22 +1642,22 @@
         <div class="tier-period">per month</div>
         <div class="tier-reward">
           <span class="tier-reward-label">정시 납부 시 월 적립</span>
-          <span class="tier-reward-amount">$500</span>
+          <span class="tier-reward-amount">500 리워드<br>포인트</span>
         </div>
       </div>
     </div>
 
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    <div class="tier-note reveal">
+      💵 <strong>미국 달러 기준</strong>이며, 환율에 따라 구독료가 변경될 수 있습니다.
     </div>
   </div>
 </section>
 
-<!-- 2X RULE -->
+<!-- DOUBLE REWARD RULE -->
 <section class="rule-section">
   <div class="container">
     <div class="section-head reveal">
-      <span class="overline">The 2× Reward Rule</span>
+      <span class="overline">Double Reward Rule</span>
       <h2>2배 리워드의 <em>비밀</em>은<br>정시 납부예요</h2>
       <p>청구서가 발행된 후 언제 내느냐에 따라 달라져요</p>
     </div>
@@ -1526,7 +1673,7 @@
         </div>
         <div class="rule-slice yellow">
           <div class="rule-days">6–30일</div>
-          <div class="rule-status">1배 적립</div>
+          <div class="rule-status">기본 적립</div>
         </div>
         <div class="rule-slice red">
           <div class="rule-days">30일 초과</div>
@@ -1549,20 +1696,16 @@
         <div class="rule-row warn">
           <div class="rule-row-emoji">⏱️</div>
           <div class="rule-row-text">
-            <strong>5일 이후 ~ 30일 이내:</strong> 납입한 금액만큼 적립됩니다.
+            <strong>5일 이후 ~ 30일 이내:</strong> 납입한 금액만큼 적립됩니다. <strong>(기본 적립)</strong>
           </div>
         </div>
         <div class="rule-row danger">
           <div class="rule-row-emoji">🚫</div>
           <div class="rule-row-text">
-            <strong>30일 초과:</strong> 계정이 <strong>비활성화</strong>됩니다. 자동이체 설정을 추천해요.
+            <strong>30일 초과:</strong> 계정이 <strong>비활성화</strong>됩니다. 자동이체 설정을 <strong>추천 드려요.</strong>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
     </div>
   </div>
 </section>
@@ -1572,13 +1715,13 @@
   <div class="container">
     <div class="section-head reveal">
       <span class="overline">Forever Yours</span>
-      <h2>내가 낸 돈은 <em>평생</em><br>계정에 남아요</h2>
-      <p>현금 환급은 되지 않지만, 적립된 금액은 없어지지 않고 계속 유지됩니다</p>
+      <h2>내가 낸 구독료는<br><em>평생</em> 내 계정에</h2>
+      <p>(사라지지 않고) 계정에 남아있어요</p>
     </div>
 
     <div class="forever-card reveal">
       <div class="forever-icon-wrap">🌸</div>
-      <h3>내가 낸 돈은 <em>평생</em><br>계정에 남아요</h3>
+      <h3>내가 낸 구독료는 <em>(사라지지 않고)</em><br>평생 내 계정에 남아 있어요</h3>
       <p class="lead">
         현금 환급은 되지 않지만,<br>
         적립된 금액은 없어지지 않고 계속 유지됩니다.
@@ -1587,7 +1730,7 @@
       <div class="forever-benefit">
         <div class="benefit-num">1</div>
         <div class="benefit-text">
-          내가 낸 돈만큼 <strong>계정에 평생 유지</strong>돼요
+          내가 낸 구독료만큼 <strong>계정에 평생 유지</strong>돼요
         </div>
       </div>
       <div class="forever-benefit">
@@ -1603,13 +1746,13 @@
         </div>
       </div>
 
-      <!-- 17% Examples inside the card -->
+      <!-- 17% Examples -->
       <div class="examples-divider">
         <div class="examples-title">✨ 17% 할인, 실제로 얼마일까요?</div>
         <div class="examples-subtitle">진짜 예시로 체감해보세요</div>
       </div>
 
-      <!-- Cruise example -->
+      <!-- Cruise -->
       <div class="example-card">
         <div class="example-head">
           <div class="example-icon">🚢</div>
@@ -1622,35 +1765,31 @@
         <div class="example-table">
           <div class="example-row">
             <span>일반 예약가 (4인)</span>
-            <span>$3,600 · 약 540만 원</span>
+            <span>$4,000 · 약 600만 원</span>
           </div>
           <div class="example-row final">
             <span>🎉 내가 내는 금액</span>
-            <span><strong>$2,988 · 약 448만 원</strong></span>
-          </div>
-          <div class="example-row">
-            <span>👤 1인당</span>
-            <span>$747 · 약 112만 원</span>
+            <span><strong>$3,320 · 약 498만 원</strong></span>
           </div>
         </div>
 
         <div class="example-highlight">
           <div class="example-highlight-label">💰 17% 할인 절약액</div>
-          <div class="example-highlight-amount">약 92만 원</div>
-          <div class="example-highlight-sub">(−$612)</div>
+          <div class="example-highlight-amount">약 102만 원</div>
+          <div class="example-highlight-sub">(−$680)</div>
         </div>
 
         <div class="example-note">
-          <strong>가족 4인이 약 92만 원 절약!</strong> 클래식 멤버십 월 $100 (약 15만 원) 기준으로 <strong>약 6개월치 구독료</strong>가 한 번에 회수되는 셈이에요.
+          <strong>가족 4인이 약 102만 원 절약!</strong> 클래식 멤버십 월 $100 (약 15만 원) 기준으로 <strong>약 7개월치 구독료</strong>가 한 번에 회수되는 셈이에요.
         </div>
       </div>
 
-      <!-- Hotel example -->
+      <!-- Hotel Short -->
       <div class="example-card">
         <div class="example-head">
           <div class="example-icon">🏨</div>
           <div class="example-title">
-            호텔 3박
+            호텔 3박 — 짧은 여행
             <span class="sub">1박 $300 · 2인 1실 기준</span>
           </div>
         </div>
@@ -1683,15 +1822,43 @@
         </div>
       </div>
 
+      <!-- Hotel Long -->
+      <div class="example-card">
+        <div class="example-head">
+          <div class="example-icon">🌴</div>
+          <div class="example-title">
+            호텔 한 달 살기 ⭐
+            <span class="sub">1박 $200 · 30박 · 2인 1실 기준</span>
+          </div>
+        </div>
+
+        <div class="example-table">
+          <div class="example-row">
+            <span>일반 예약가 ($200 × 30박)</span>
+            <span>$6,000 · 약 900만 원</span>
+          </div>
+          <div class="example-row final">
+            <span>🎉 내가 내는 금액</span>
+            <span><strong>$4,980 · 약 747만 원</strong></span>
+          </div>
+        </div>
+
+        <div class="example-highlight">
+          <div class="example-highlight-label">💰 17% 할인 절약액</div>
+          <div class="example-highlight-amount">약 153만 원</div>
+          <div class="example-highlight-sub">(−$1,020)</div>
+        </div>
+
+        <div class="example-note">
+          <strong>한 달 살기 한 번에 약 153만 원 절약!</strong> 체류가 길수록 절약액도 커져요. 디지털 노마드, 워케이션, 장기 여행에 완벽해요. 🌴
+        </div>
+      </div>
+
       <div class="example-disclaimer">
         ※ 환율은 1 USD = 1,500원 기준 예시입니다. 실제 환율은 결제 시점에 따라 달라질 수 있어요.<br>
         ※ 상품 가격은 예시이며, 실제 예약 시 시즌·선실·호텔 등급에 따라 달라집니다.<br>
-        ※ 자세한 규정은 <a href="https://drive.google.com/file/d/1aBU7bfPgmGc2arr2BKEitg2hiMYvdFcT/view?usp=drive_link" target="_blank" style="color: var(--terracotta); font-weight: 700;">멤버십 약관</a>을 참고해주세요.
+        ※ 자세한 규정은 <a href="https://drive.google.com/file/d/1aBU7bfPgmGc2arr2BKEitg2hiMYvdFcT/view?usp=drive_link" target="_blank">멤버십 약관</a>을 참고해주세요.
       </div>
-    </div>
-
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
     </div>
   </div>
 </section>
@@ -1713,7 +1880,7 @@
 
     <div class="timeline">
 
-      <!-- 단계 1: 여정의 시작 -->
+      <!-- 단계 1 -->
       <div class="milestone reveal">
         <div class="milestone-dot"></div>
         <h3 class="milestone-title">🌱 여정의 시작 — 가입</h3>
@@ -1736,7 +1903,7 @@
         </div>
       </div>
 
-      <!-- 단계 2: 회사와 멤버의 약속 -->
+      <!-- 단계 2 -->
       <div class="milestone reveal">
         <div class="milestone-dot"></div>
         <h3 class="milestone-title">🤝 회사와 멤버의 약속</h3>
@@ -1748,7 +1915,7 @@
         </div>
       </div>
 
-      <!-- 단계 3: 두 가지 예약 방법 -->
+      <!-- 단계 3 -->
       <div class="milestone reveal">
         <div class="milestone-dot"></div>
         <h3 class="milestone-title">🛤️ 두 가지 예약 방법</h3>
@@ -1760,11 +1927,25 @@
           <ul class="plan-list">
             <li><strong>30~59일 상품 예약 시</strong> → 2개월 구독료 선결제</li>
             <li><strong>60~90일 상품 예약 시</strong> → 1개월 구독료 선결제</li>
-            <li><strong>90일 이후 상품 예약 시</strong> → 최대 ~50% 리워드 사용 가능</li>
+            <li><strong>90일 이후 상품 예약 시</strong> → 최대 50% 리워드 사용 가능</li>
           </ul>
           <div class="plan-tip">
-            👉 <strong>가입 후 3개월 이내에도 크루즈 예약이 가능해요!</strong><br>
-            출발을 3개월 후에 하는 게 아니라, <strong>예약을 빨리 할수록 금액이 저렴해지고 혜택이 늘어납니다.</strong>
+            👉 <strong>추천) 가입 후 3개월 이내 크루즈 예약을 추천드려요.</strong><br>
+            크루즈는 예약을 빨리 할수록 <strong>가장 저렴</strong>하고 <strong>더 좋은 방</strong>을 예약하실 수 있습니다. 빠르게 계획 세워서 혜택을 누려보세요.
+          </div>
+
+          <div class="step-box">
+            <div class="step-box-title">📌 리워드 + 카드 결제 2단계 공식</div>
+            <div class="step-row">
+              <span class="tag">1단계</span> 크루즈 객실가의 <strong>최대 50%까지</strong> 리워드 차감 <strong>($1 = 1 리워드)</strong>
+            </div>
+            <div class="step-row">
+              <span class="tag">2단계</span> 나머지 금액을 <strong>카드로 결제</strong>
+            </div>
+            <div class="step-example">
+              💡 캐빈 <strong>$1,800</strong> 예약 시<br>
+              → 900 리워드 차감 + 카드 $900 결제
+            </div>
           </div>
         </div>
 
@@ -1775,10 +1956,26 @@
             👉 <strong>꾸준히 리워드 모으기 — 올 리워드 예약 준비</strong><br>
             꾸준히 적립해 충분한 리워드를 보유하고, <strong>현금 결제 없이 리워드로만 예약</strong>하고 싶으신 분들께 추천드려요.
           </div>
+
+          <div class="step-box">
+            <div class="step-box-title">📌 올 리워드 결제 2단계 공식</div>
+            <div class="step-row">
+              <span class="tag">1단계</span> 크루즈 객실가의 <strong>최대 50%까지</strong> 리워드 차감 <strong>($1 = 1 리워드)</strong>
+            </div>
+            <div class="step-row">
+              <span class="tag">2단계</span> 나머지 금액을 <strong>$1 = 2 리워드</strong>로 결제
+            </div>
+            <div class="step-example">
+              💡 캐빈 <strong>$1,800</strong> 예약 시<br>
+              → 1단계: 900 리워드 차감<br>
+              → 2단계: 1,800 리워드 결제<br>
+              → <strong>총 2,700 리워드 필요</strong>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- 단계 4: 승선까지 유지 -->
+      <!-- 단계 4 -->
       <div class="milestone reveal">
         <div class="milestone-dot"></div>
         <h3 class="milestone-title">⚓ 승선까지 유지 구간</h3>
@@ -1787,7 +1984,7 @@
         </p>
       </div>
 
-      <!-- 단계 5: 승선 -->
+      <!-- 단계 5 -->
       <div class="milestone reveal">
         <div class="milestone-dot"></div>
         <h3 class="milestone-title">✈️ 승선 — 마침내 떠나는 날</h3>
@@ -1801,10 +1998,6 @@
         </div>
       </div>
 
-    </div>
-
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
     </div>
   </div>
 </section>
@@ -1841,14 +2034,10 @@
       </div>
     </div>
 
-    <div class="diff-callout reveal" style="background: white; border: 1px solid var(--rose);">
+    <div class="training-callout reveal">
       <strong>개인 멤버십이에요.</strong><br>
       본인이 직접 알아보고, 본인이 본인의 멤버십을 관리하는 것<br>
       — 그게 가장 중요합니다.
-    </div>
-
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
     </div>
   </div>
 </section>
@@ -1880,7 +2069,7 @@
       <div class="formula-row" style="margin-bottom: 0;">
         <div class="formula-box highlight" style="grid-column: 1 / -1;">
           <div class="formula-label">Result</div>
-          <div class="formula-value" style="font-size: 19px;">내 구독료 $100 면제<br>+ $200 리워드 계속 적립</div>
+          <div class="formula-value" style="font-size: 18px;">내 구독료 $100 면제<br>+ 200 리워드 계속 적립</div>
         </div>
       </div>
 
@@ -1893,8 +2082,10 @@
       🎁 <strong>파트너 자격이 있어야<br>5가지 보너스와 인센티브를 받을 수 있어요!</strong>
     </div>
 
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
+    <div class="discount-btn-wrap reveal">
+      <a class="discount-btn" href="https://kbellalee4808-star.github.io/100discount/" target="_blank" rel="noopener">
+        🎁 구독료 할인받기
+      </a>
     </div>
   </div>
 </section>
@@ -1918,10 +2109,6 @@
         가입·결제·계정 조작은 반드시 본인이 직접.<br>
         방법이 궁금하면 <strong>트레이닝</strong>으로 배울 수 있어요.
       </div>
-    </div>
-
-    <div class="back-top-wrap">
-      <a class="back-top" href="#top">⬆ 맨 위로</a>
     </div>
   </div>
 </section>
@@ -1966,11 +2153,9 @@
   </p>
 </footer>
 
-<!-- Floating back-to-top -->
 <button class="float-top" id="floatTop" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="맨 위로">⬆</button>
 
 <script>
-  // Reveal on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -1978,7 +2163,6 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Floating button
   const floatBtn = document.getElementById('floatTop');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 600) floatBtn.classList.add('show');
